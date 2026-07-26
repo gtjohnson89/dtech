@@ -131,6 +131,10 @@ function statusClass(value) {
   return String(value || "unknown").toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
+function key(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
 function scoreClass(score) {
   const value = Number(score);
   if (value >= 8) return "score-high";
@@ -181,7 +185,7 @@ function renderProject(project, cartById, index) {
   const detailsId = `project-details-${index}-${statusClass(projectId)}`;
   const nextAction = Array.isArray(project.nextActions) && project.nextActions[0] ? project.nextActions[0] : "Choose the next concrete action.";
 
-  return `<article class="project-card" data-project-card data-status="${esc(String(project.status || "unknown").toLowerCase())}" data-priority="${esc(number(project.priority, "99"))}" data-score="${esc(number(scores.total, "0"))}">
+  return `<article class="project-card" id="project-${esc(statusClass(projectId))}" data-project-card data-status="${esc(String(project.status || "unknown").toLowerCase())}" data-priority="${esc(number(project.priority, "99"))}" data-score="${esc(number(scores.total, "0"))}">
     <button class="project-toggle" type="button" aria-expanded="false" aria-controls="${esc(detailsId)}">
       <span class="project-head">
         <span>
@@ -243,27 +247,33 @@ function renderCart(cart, projectById) {
   </article>`;
 }
 
-function renderIdea(idea, index) {
+function renderIdea(idea, index, projectByTitle) {
+  const project = projectByTitle ? projectByTitle.get(key(idea.title)) : null;
+  const projectId = project ? statusClass(project.id || project.title) : "";
+  const title = project
+    ? `<a href="#project-${esc(projectId)}" data-open-section="projects" data-open-project="${esc(projectId)}">${esc(idea.title || "Untitled idea")} <span aria-hidden="true">→</span></a>`
+    : text(idea.title, "Untitled idea");
   return `<article class="idea-card ${esc(scoreClass(idea.score))}" style="--order:${index}">
-    <div class="idea-head"><h3>${text(idea.title, "Untitled idea")}</h3><div class="idea-badges"><span class="score-badge">Score ${esc(number(idea.score))}</span><span class="effort-badge ${esc(effortClass(idea.effort))}">Effort ${esc(idea.effort || "?")}</span></div></div>
+    <div class="idea-head"><h3>${title}</h3><div class="idea-badges"><span class="score-badge">Score ${esc(number(idea.score))}</span><span class="effort-badge ${esc(effortClass(idea.effort))}">Effort ${esc(idea.effort || "?")}</span></div></div>
     <dl class="idea-details">${field("Problem", text(idea.problem))}${field("Build angle", text(idea.fit))}</dl>
   </article>`;
 }
 
-function renderScan(entry, latest = false) {
+function renderScan(entry, latest = false, projectByTitle = null) {
   const ideas = Array.isArray(entry.ideas) ? entry.ideas.slice().sort((a, b) => Number(b.score || 0) - Number(a.score || 0)) : [];
   const themes = Array.isArray(entry.postThemes) ? entry.postThemes : [];
   const strong = ideas.filter((idea) => Number(idea.score) >= 7).length;
   const id = `scan-details-${String(entry.date || "unknown").replace(/[^a-z0-9]+/gi, "-")}`;
   return `<article class="scan-card ${latest ? "latest-scan" : "archive-scan"}"${latest ? " id=latest-scan" : ""}>
     <button class="disclosure-toggle scan-head" type="button" aria-expanded="false" aria-controls="${id}"><span><p class="eyebrow">${latest ? "Latest daily scan" : "Archived scan"}</p><h3>${esc(formatDate(entry.date))}</h3><div class="meta-row"><span class="status-badge ${entry.accessOk ? "status-access" : "status-failed"}">${entry.accessOk ? "Access OK" : "Access unavailable"}</span><span class="pill">${esc(ideas.length)} ideas</span><span class="pill">${esc(strong)} strong</span></div></span><span class="disclosure-side"><span class="muted">View details</span><span class="project-chevron" aria-hidden="true"></span></span></button>
-    <div class="scan-body" id="${id}" hidden><section class="theme-panel"><h4>Themes surfaced</h4><div class="theme-cloud">${themes.length ? themes.map((theme) => `<span>${esc(theme)}</span>`).join("") : `<span class="muted">No themes recorded.</span>`}</div>${entry.group ? `<p class="scan-notes">${link(entry.group, "Open source group", "text-link")}</p>` : ""}${entry.notes ? `<p class="scan-notes">${esc(entry.notes)}</p>` : ""}</section><section class="ideas-panel"><div class="subhead"><h4>Ideas by score</h4><span class="muted">${esc(ideas.length)} opportunities</span></div>${ideas.length ? `<div class="ideas-grid">${ideas.map(renderIdea).join("")}</div>` : emptyState("No ideas in this scan", "Run a daily scan to populate the opportunity queue.")}</section></div>
+    <div class="scan-body" id="${id}" hidden><section class="theme-panel"><h4>Themes surfaced</h4><div class="theme-cloud">${themes.length ? themes.map((theme) => `<span>${esc(theme)}</span>`).join("") : `<span class="muted">No themes recorded.</span>`}</div>${entry.group ? `<p class="scan-notes">${link(entry.group, "Open source group", "text-link")}</p>` : ""}${entry.notes ? `<p class="scan-notes">${esc(entry.notes)}</p>` : ""}</section><section class="ideas-panel"><div class="subhead"><h4>Ideas by score</h4><span class="muted">${esc(ideas.length)} opportunities</span></div>${ideas.length ? `<div class="ideas-grid">${ideas.map((idea, index) => renderIdea(idea, index, projectByTitle)).join("")}</div>` : emptyState("No ideas in this scan", "Run a daily scan to populate the opportunity queue.")}</section></div>
   </article>`;
 }
 
 function buildHtml({ entries, projects, carts }) {
   const latest = entries[0] || null;
   const projectById = new Map(projects.map((project) => [project.id, project]));
+  const projectByTitle = new Map(projects.map((project) => [key(project.title), project]));
   const cartById = new Map(carts.map((cart) => [cart.id, cart]));
   const groupUrl = safeUrl(latest && latest.group) || "https://www.facebook.com/groups/397162319426193";
   const groupName = latest && latest.groupName ? latest.groupName : "Technology and aids for dementia";
@@ -287,7 +297,7 @@ function buildHtml({ entries, projects, carts }) {
   </div></header>
   <main class="shell">
     <section class="portal-list" aria-label="Explore the lab">
-      <details id="research" class="portal-card"><summary><span><strong>Research</strong><small>${latest ? `Latest scan: ${esc(formatDate(latest.date))}` : "No scan yet"} · ${esc(strongIdeas)} ideas</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content">${latest ? renderScan(latest, true) : emptyState("No daily scan yet", "Append a JSON object to ./log.jsonl, then rebuild the dashboard.")}${entries.length > 1 ? `<div class="archive-list">${entries.slice(1).map((entry) => renderScan(entry)).join("")}</div>` : ""}</div></details>
+      <details id="research" class="portal-card"><summary><span><strong>Research</strong><small>${latest ? `Latest scan: ${esc(formatDate(latest.date))}` : "No scan yet"} · ${esc(strongIdeas)} ideas</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content">${latest ? renderScan(latest, true, projectByTitle) : emptyState("No daily scan yet", "Append a JSON object to ./log.jsonl, then rebuild the dashboard.")}${entries.length > 1 ? `<div class="archive-list">${entries.slice(1).map((entry) => renderScan(entry, false, projectByTitle)).join("")}</div>` : ""}</div></details>
       <details id="projects" class="portal-card"><summary><span><strong>Projects</strong><small>${esc(projects.length)} projects · ${esc(projectPreview)}</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="toolbar"><div class="filter-group" role="group" aria-label="Filter projects by status"><button class="filter-button active" type="button" data-status-filter="all">All <span>${esc(projects.length)}</span></button>${projectStatuses.map((status) => `<button class="filter-button" type="button" data-status-filter="${esc(status)}">${esc(statusLabel(status))} <span>${projects.filter((project) => String(project.status || "unknown").toLowerCase() === status).length}</span></button>`).join("")}</div><label class="sort-control" for="project-sort">Sort <select id="project-sort"><option value="priority">Priority first</option><option value="score">Score first</option><option value="title">Title A–Z</option></select></label></div><div class="project-grid-list" data-project-list>${projects.length ? projects.map((project, index) => renderProject(project, cartById, index)).join("") : emptyState("No projects loaded", "Add project JSON files to ./projects and rebuild the dashboard.")}</div><p class="filter-empty" data-filter-empty hidden>No projects match this filter.</p></div></details>
     </section>
   </main>
@@ -341,6 +351,7 @@ main { padding: 58px 0 90px; }.section-heading, .archive-heading { display:flex;
 .hero { padding:15px 0 18px; }.hero-grid { display:block; }.hero h1 { margin:0 0 9px; font-size:clamp(38px,4.7vw,54px); line-height:1.02; }.hero-copy { max-width:650px; margin:0; font-size:15px; }.hero .eyebrow { margin-bottom:7px; } main { padding:32px 0 60px; }.now-section { margin-bottom:12px; }.now-card { padding:20px 22px; border:1px solid rgba(244,185,79,.42); border-radius:var(--radius); background:linear-gradient(120deg, rgba(244,185,79,.12), rgba(21,49,57,.7)); box-shadow:var(--shadow); }.now-card h2 { margin:0 0 7px; font-size:clamp(25px,3.3vw,35px); letter-spacing:-.04em; }.now-card > p:not(.focus-label) { max-width:760px; margin:0; color:#d7e5df; }.now-card-foot { display:flex; align-items:center; justify-content:space-between; gap:15px; margin-top:16px; }.portal-list { display:grid; gap:10px; }.portal-card { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:rgba(21,49,57,.62); box-shadow:var(--shadow); }.portal-card summary { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px 20px; cursor:pointer; list-style:none; }.portal-card summary::-webkit-details-marker { display:none; }.portal-card summary:hover { background:rgba(255,255,255,.025); }.portal-card summary:focus-visible { outline:2px solid var(--teal); outline-offset:-3px; }.portal-card summary > span:first-child { display:grid; gap:2px; }.portal-kicker { color:var(--teal); font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }.portal-card strong { color:var(--ink); font-size:20px; letter-spacing:-.025em; }.portal-card small { color:var(--muted); font-size:12px; }.portal-arrow { width:10px; height:10px; border-right:2px solid var(--teal); border-bottom:2px solid var(--teal); transform:rotate(45deg) translateY(-3px); transition:transform .18s ease; }.portal-card[open] .portal-arrow { transform:rotate(225deg) translate(-1px,-1px); }.portal-content { padding:0 18px 18px; border-top:1px solid var(--line); }.portal-content .toolbar { margin-top:14px; }.portal-content .research-columns { margin-top:17px; }.portal-content .project-card { margin-top:0; }.portal-content .project-grid-list { margin-top:0; }.portal-content .cart-list { margin-top:0; }.portal-content .scan-card { margin-bottom:0; }.portal-content .archive-list { margin-top:12px; }.quick-stats, .resume-card { display:none; }
 @media (max-width:640px) { .hero { padding-top:13px; }.top-links { display:flex; gap:15px; font-size:12px; }.brand small { font-size:9px; }.hero h1 { font-size:39px; }.hero-copy { font-size:14px; }.now-card { padding:18px; }.now-card h2 { font-size:26px; }.now-card-foot { margin-top:14px; }.portal-card summary { padding:16px 18px; }.portal-card strong { font-size:18px; }.portal-content { padding:0 12px 12px; }.portal-content .toolbar { margin-top:12px; } }
 .project-costs { margin-top:18px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:rgba(11,23,27,.2); }.project-costs > summary { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:13px 14px; cursor:pointer; color:var(--teal-soft); font-weight:800; font-size:13px; list-style:none; }.project-costs > summary::-webkit-details-marker { display:none; }.project-costs > summary span { color:var(--amber-soft); }.project-costs > summary::after { content:""; width:8px; height:8px; margin-left:3px; border-right:2px solid var(--teal); border-bottom:2px solid var(--teal); transform:rotate(45deg) translateY(-2px); transition:transform .18s ease; }.project-costs[open] > summary::after { transform:rotate(225deg) translate(-1px,-1px); }.project-costs .cart-card { border:0; border-top:1px solid var(--line); border-radius:0; box-shadow:none; }.project-costs .cart-head { background:rgba(255,255,255,.02); }
+.idea-head h3 a { color:var(--ink); text-decoration:none; }.idea-head h3 a:hover, .idea-head h3 a:focus-visible { color:var(--teal-soft); text-decoration:underline; }.idea-head h3 a span { color:var(--teal); }
 `;
 
 const JS = `document.addEventListener("DOMContentLoaded", function () {
@@ -397,9 +408,25 @@ const JS = `document.addEventListener("DOMContentLoaded", function () {
       if (section && section.tagName === "DETAILS") section.open = true;
     });
   });
+  function openProject(id) {
+    var projects = document.getElementById("projects");
+    var card = document.getElementById("project-" + id);
+    if (projects && projects.tagName === "DETAILS") projects.open = true;
+    if (!card) return;
+    var toggle = card.querySelector(".project-toggle");
+    var details = toggle && document.getElementById(toggle.getAttribute("aria-controls"));
+    if (toggle && details && toggle.getAttribute("aria-expanded") !== "true") {
+      toggle.setAttribute("aria-expanded", "true");
+      details.hidden = false;
+    }
+  }
+  document.querySelectorAll("[data-open-project]").forEach(function (control) {
+    control.addEventListener("click", function () { openProject(control.getAttribute("data-open-project")); });
+  });
   if (window.location.hash) {
     var linkedSection = document.querySelector(window.location.hash);
     if (linkedSection && linkedSection.tagName === "DETAILS") linkedSection.open = true;
+    if (window.location.hash.indexOf("#project-") === 0) openProject(window.location.hash.slice(9));
   }
   if (sort) sort.addEventListener("change", refresh);
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {

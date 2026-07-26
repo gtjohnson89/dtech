@@ -52,9 +52,25 @@ document.addEventListener("DOMContentLoaded", function () {
       if (section && section.tagName === "DETAILS") section.open = true;
     });
   });
+  function openProject(id) {
+    var projects = document.getElementById("projects");
+    var card = document.getElementById("project-" + id);
+    if (projects && projects.tagName === "DETAILS") projects.open = true;
+    if (!card) return;
+    var toggle = card.querySelector(".project-toggle");
+    var details = toggle && document.getElementById(toggle.getAttribute("aria-controls"));
+    if (toggle && details && toggle.getAttribute("aria-expanded") !== "true") {
+      toggle.setAttribute("aria-expanded", "true");
+      details.hidden = false;
+    }
+  }
+  document.querySelectorAll("[data-open-project]").forEach(function (control) {
+    control.addEventListener("click", function () { openProject(control.getAttribute("data-open-project")); });
+  });
   if (window.location.hash) {
     var linkedSection = document.querySelector(window.location.hash);
     if (linkedSection && linkedSection.tagName === "DETAILS") linkedSection.open = true;
+    if (window.location.hash.indexOf("#project-") === 0) openProject(window.location.hash.slice(9));
   }
   if (sort) sort.addEventListener("change", refresh);
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
