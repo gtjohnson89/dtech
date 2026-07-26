@@ -17,7 +17,7 @@ This folder is George’s operating system for dementia-tech opportunity discove
 - `projects/<slug>.json` — one file per project
 - `carts/<slug>.json` — shopping cart / BOM snapshots for a project
 - `spikes/<slug>/` — optional Codex feasibility code/notes
-- `site/` — generated static dashboard
+- `index.html` + `assets/` — generated static dashboard
 - `README.md` — runbook + model routing
 
 ## Project JSON shape
