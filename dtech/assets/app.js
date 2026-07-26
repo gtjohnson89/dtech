@@ -37,6 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
       if (details) details.hidden = expanded;
     });
   });
+  document.querySelectorAll(".disclosure-toggle").forEach(function (toggle) {
+    toggle.addEventListener("click", function (event) {
+      if (event.target.closest("a")) return;
+      var expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      var details = document.getElementById(toggle.getAttribute("aria-controls"));
+      if (details) details.hidden = expanded;
+    });
+  });
   if (sort) sort.addEventListener("change", refresh);
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener("click", function (event) {
