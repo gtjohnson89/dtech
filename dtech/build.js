@@ -175,9 +175,9 @@ function renderProject(project, cartById, index) {
   const software = project.softwarePlan || {};
   const cart = project.bomCartId ? cartById.get(project.bomCartId) : null;
   const projectId = project.id || project.title || "project";
-  const cartAction = cart
-    ? `<a class="text-link" href="#cart-${esc(cart.id || project.bomCartId)}">View BOM cart <span aria-hidden="true">↓</span></a>`
-    : `<span class="muted">No BOM cart linked</span>`;
+  const costPanel = cart
+    ? `<details class="project-costs"><summary>Prototype costs <span>${money(cart.grandTotalUsd)}</span></summary>${renderCart(cart)}</details>`
+    : "";
   const detailsId = `project-details-${index}-${statusClass(projectId)}`;
   const nextAction = Array.isArray(project.nextActions) && project.nextActions[0] ? project.nextActions[0] : "Choose the next concrete action.";
 
@@ -210,7 +210,7 @@ function renderProject(project, cartById, index) {
       <section><h4 class="list-heading open-heading">Unsolved / open questions</h4>${list(project.unsolved)}</section>
       <section><h4 class="list-heading next-heading">Next actions</h4>${list(project.nextActions)}</section>
       </div>
-      <div class="project-foot"><span class="muted">${esc(project.notes || "Portfolio record")}</span><span>${cartAction}</span></div>
+${costPanel ? `      ${costPanel}\n` : ""}      <div class="project-foot"><span class="muted">${esc(project.notes || "Portfolio record")}</span></div>
     </div>
   </article>`;
 }
@@ -227,7 +227,7 @@ function renderFocus(project) {
 
 function renderCart(cart, projectById) {
   const items = Array.isArray(cart.items) ? cart.items : [];
-  const project = projectById.get(cart.projectId);
+  const project = projectById ? projectById.get(cart.projectId) : null;
   const rows = items.length
     ? items.map((item) => `<tr>
         <td><strong>${text(item.name, "Unnamed item")}</strong>${item.notes ? `<small>${esc(item.notes)}</small>` : ""}${item.required === false ? `<span class="optional">Optional</span>` : ""}</td>
@@ -288,7 +288,7 @@ function buildHtml({ entries, projects, carts }) {
   </div></header>
   <main class="shell">
     <section class="portal-list" aria-label="Explore the lab">
-      <details id="research" class="portal-card"><summary><span><span class="portal-kicker">Step 1 · Daily practice</span><strong>Research & synthesis</strong><small>${latest ? `Latest scan: ${esc(formatDate(latest.date))}` : "Daily caregiver research"} · ${esc(strongIdeas)} promising ideas surfaced</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="research-columns"><div><h3 class="subsection-title">Latest research</h3>${latest ? renderScan(latest, true) : emptyState("No daily scan yet", "Append a JSON object to ./log.jsonl, then rebuild the dashboard.")}</div><div><h3 class="subsection-title">Prototype cost sheets</h3>${carts.length ? `<div class="cart-list">${carts.map((cart) => renderCart(cart, projectById)).join("")}</div>` : emptyState("No carts loaded", "Add BOM JSON files to ./carts and rebuild the dashboard.")}</div></div>${entries.length > 1 ? `<div class="archive-list">${entries.slice(1).map((entry) => renderScan(entry)).join("")}</div>` : ""}</div></details>
+      <details id="research" class="portal-card"><summary><span><span class="portal-kicker">Step 1 · Daily practice</span><strong>Research & synthesis</strong><small>${latest ? `Latest scan: ${esc(formatDate(latest.date))}` : "Daily caregiver research"} · ${esc(strongIdeas)} promising ideas surfaced</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><h3 class="subsection-title">Latest research</h3>${latest ? renderScan(latest, true) : emptyState("No daily scan yet", "Append a JSON object to ./log.jsonl, then rebuild the dashboard.")}${entries.length > 1 ? `<div class="archive-list">${entries.slice(1).map((entry) => renderScan(entry)).join("")}</div>` : ""}</div></details>
       <details id="projects" class="portal-card"><summary><span><span class="portal-kicker">Step 2 · What it becomes</span><strong>Projects opened from research</strong><small>${esc(projects.length)} projects · ${esc(projectPreview)}</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="toolbar"><div class="filter-group" role="group" aria-label="Filter projects by status"><button class="filter-button active" type="button" data-status-filter="all">All <span>${esc(projects.length)}</span></button>${projectStatuses.map((status) => `<button class="filter-button" type="button" data-status-filter="${esc(status)}">${esc(statusLabel(status))} <span>${projects.filter((project) => String(project.status || "unknown").toLowerCase() === status).length}</span></button>`).join("")}</div><label class="sort-control" for="project-sort">Sort <select id="project-sort"><option value="priority">Priority first</option><option value="score">Score first</option><option value="title">Title A–Z</option></select></label></div><div class="project-grid-list" data-project-list>${projects.length ? projects.map((project, index) => renderProject(project, cartById, index)).join("") : emptyState("No projects loaded", "Add project JSON files to ./projects and rebuild the dashboard.")}</div><p class="filter-empty" data-filter-empty hidden>No projects match this filter.</p></div></details>
     </section>
   </main>
@@ -305,6 +305,7 @@ const CSS = `:root {
   --radius: 18px; --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; } html { scroll-behavior: smooth; } body { margin: 0; color: var(--ink); background: var(--slate-950); font: 15px/1.55 var(--font); min-width: 320px; }
+[hidden] { display: none !important; }
 body::before { content: ""; position: fixed; inset: 0; z-index: -2; background: linear-gradient(145deg, #0b171b 0%, #10252b 47%, #0c1c20 100%); }
 .ambient { position: fixed; z-index: -1; width: 40vw; height: 40vw; border-radius: 50%; filter: blur(80px); opacity: .14; pointer-events: none; }.ambient-one { background: var(--teal); top: -18vw; left: -12vw; }.ambient-two { background: var(--amber); top: 32vw; right: -24vw; }
 a { color: var(--teal-soft); text-decoration: none; } a:hover { color: #fff; text-decoration: underline; } button, select { font: inherit; }
@@ -340,6 +341,7 @@ main { padding: 58px 0 90px; }.section-heading, .archive-heading { display:flex;
 /* Phone-first front door: only the current work and two optional paths are visible at first. */
 .hero { padding:15px 0 18px; }.hero-grid { display:block; }.hero h1 { margin:0 0 9px; font-size:clamp(38px,4.7vw,54px); line-height:1.02; }.hero-copy { max-width:650px; margin:0; font-size:15px; }.hero .eyebrow { margin-bottom:7px; } main { padding:32px 0 60px; }.now-section { margin-bottom:12px; }.now-card { padding:20px 22px; border:1px solid rgba(244,185,79,.42); border-radius:var(--radius); background:linear-gradient(120deg, rgba(244,185,79,.12), rgba(21,49,57,.7)); box-shadow:var(--shadow); }.now-card h2 { margin:0 0 7px; font-size:clamp(25px,3.3vw,35px); letter-spacing:-.04em; }.now-card > p:not(.focus-label) { max-width:760px; margin:0; color:#d7e5df; }.now-card-foot { display:flex; align-items:center; justify-content:space-between; gap:15px; margin-top:16px; }.portal-list { display:grid; gap:10px; }.portal-card { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:rgba(21,49,57,.62); box-shadow:var(--shadow); }.portal-card summary { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px 20px; cursor:pointer; list-style:none; }.portal-card summary::-webkit-details-marker { display:none; }.portal-card summary:hover { background:rgba(255,255,255,.025); }.portal-card summary:focus-visible { outline:2px solid var(--teal); outline-offset:-3px; }.portal-card summary > span:first-child { display:grid; gap:2px; }.portal-kicker { color:var(--teal); font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }.portal-card strong { color:var(--ink); font-size:20px; letter-spacing:-.025em; }.portal-card small { color:var(--muted); font-size:12px; }.portal-arrow { width:10px; height:10px; border-right:2px solid var(--teal); border-bottom:2px solid var(--teal); transform:rotate(45deg) translateY(-3px); transition:transform .18s ease; }.portal-card[open] .portal-arrow { transform:rotate(225deg) translate(-1px,-1px); }.portal-content { padding:0 18px 18px; border-top:1px solid var(--line); }.portal-content .toolbar { margin-top:14px; }.portal-content .research-columns { margin-top:17px; }.portal-content .project-card { margin-top:0; }.portal-content .project-grid-list { margin-top:0; }.portal-content .cart-list { margin-top:0; }.portal-content .scan-card { margin-bottom:0; }.portal-content .archive-list { margin-top:12px; }.quick-stats, .resume-card { display:none; }
 @media (max-width:640px) { .hero { padding-top:13px; }.top-links { display:flex; gap:15px; font-size:12px; }.brand small { font-size:9px; }.hero h1 { font-size:39px; }.hero-copy { font-size:14px; }.now-card { padding:18px; }.now-card h2 { font-size:26px; }.now-card-foot { margin-top:14px; }.portal-card summary { padding:16px 18px; }.portal-card strong { font-size:18px; }.portal-content { padding:0 12px 12px; }.portal-content .toolbar { margin-top:12px; } }
+.project-costs { margin-top:18px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:rgba(11,23,27,.2); }.project-costs > summary { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:13px 14px; cursor:pointer; color:var(--teal-soft); font-weight:800; font-size:13px; list-style:none; }.project-costs > summary::-webkit-details-marker { display:none; }.project-costs > summary span { color:var(--amber-soft); }.project-costs > summary::after { content:""; width:8px; height:8px; margin-left:3px; border-right:2px solid var(--teal); border-bottom:2px solid var(--teal); transform:rotate(45deg) translateY(-2px); transition:transform .18s ease; }.project-costs[open] > summary::after { transform:rotate(225deg) translate(-1px,-1px); }.project-costs .cart-card { border:0; border-top:1px solid var(--line); border-radius:0; box-shadow:none; }.project-costs .cart-head { background:rgba(255,255,255,.02); }
 `;
 
 const JS = `document.addEventListener("DOMContentLoaded", function () {
