@@ -1,0 +1,83 @@
+{
+  "id": "one-function-church-radio",
+  "projectId": "one-function-church-radio",
+  "title": "Prototype cart — one-button radio box",
+  "updated": "2026-07-26",
+  "currency": "USD",
+  "pricingMode": "browser-research",
+  "vendorsPreferred": ["amazon", "other"],
+  "items": [
+    {
+      "name": "ESP32 dev board (USB-C)",
+      "qty": 1,
+      "unitUsd": 8.99,
+      "totalUsd": 8.99,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=esp32+dev+board+max98357a",
+      "sku": null,
+      "notes": "Browser-priced 2026-07-26 example around $8.99 single board.",
+      "required": true
+    },
+    {
+      "name": "MAX98357A I2S amp (2-pack amortized to 1)",
+      "qty": 1,
+      "unitUsd": 3.44,
+      "totalUsd": 3.44,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=esp32+dev+board+max98357a",
+      "sku": null,
+      "notes": "Browser-priced 2026-07-26; $6.88 for 2-pack => ~$3.44 each.",
+      "required": true
+    },
+    {
+      "name": "I2S speaker kit / 3W speaker",
+      "qty": 1,
+      "unitUsd": 9.99,
+      "totalUsd": 9.99,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=esp32+dev+board+max98357a",
+      "sku": null,
+      "notes": "Browser-priced example 2-pack kit $9.99; treat as current single-kit proxy.",
+      "required": true
+    },
+    {
+      "name": "Arcade-style big button",
+      "qty": 1,
+      "unitUsd": 4.0,
+      "totalUsd": 4.0,
+      "vendor": "amazon",
+      "url": null,
+      "sku": null,
+      "notes": "Estimate pending exact product pick.",
+      "required": true
+    },
+    {
+      "name": "5V power supply",
+      "qty": 1,
+      "unitUsd": 8.0,
+      "totalUsd": 8.0,
+      "vendor": "amazon",
+      "url": null,
+      "sku": null,
+      "notes": "Estimate.",
+      "required": true
+    },
+    {
+      "name": "Filament for enclosure",
+      "qty": 1,
+      "unitUsd": 3.0,
+      "totalUsd": 3.0,
+      "vendor": "other",
+      "url": null,
+      "sku": null,
+      "notes": "Estimate.",
+      "required": true
+    }
+  ],
+  "subtotalUsd": 37.42,
+  "shippingEstimateUsd": 0,
+  "taxEstimateUsd": 0,
+  "grandTotalUsd": 37.42,
+  "missingItems": ["Final big-button SKU", "Exact PSU SKU", "Strain relief / feet"],
+  "notes": "Good low-cost hardware prototype path. Prefer stream preset over AM for MVP."
+}

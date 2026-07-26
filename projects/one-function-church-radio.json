@@ -1,0 +1,64 @@
+{
+  "id": "one-function-church-radio",
+  "title": "One-function church radio box",
+  "status": "research",
+  "priority": 4,
+  "created": "2026-07-26",
+  "updated": "2026-07-26",
+  "source": {
+    "group": "https://www.facebook.com/groups/397162319426193",
+    "firstSeen": "2026-07-26",
+    "themes": ["church service listening", "one-button simplicity", "multi-function radios too hard"]
+  },
+  "problem": "Multi-function radios/CD players overwhelm users. Some families only need one trusted audio source (church service, AM station, hymn stream) with a single giant button.",
+  "solution": "3D-printed one-button audio box around ESP32 + amp/speaker or a pre-tuned simple radio module. Caregiver presets the only station/stream.",
+  "whyWidespread": "Niche but emotionally important. Lower mass-market than TV/phone, still recurring.",
+  "targetUser": "Faith-oriented families wanting continuity of Sunday service / familiar audio.",
+  "fitForGeorge": "Excellent tinkerer + 3D print project. Hardware/firmware more than app ecosystem.",
+  "feasibility": {
+    "overall": 8,
+    "hardware": 8,
+    "software": 8,
+    "regulatory": 9,
+    "notes": "Internet-radio path is easy; true AM reception is messier. Start with preset stream."
+  },
+  "market": {
+    "needSignal": "medium",
+    "competition": ["simple senior radios", "Alexa routines", "church app on tablet"],
+    "willingnessToPay": "Likely $39-$79 for a dedicated box.",
+    "distribution": ["etsy", "church networks", "direct"],
+    "profitHypothesis": "Low BOM, charming product, but smaller TAM than TV/phone."
+  },
+  "costs": {
+    "prototypeBomUsd": 28.86,
+    "unitBomUsd": 22.0,
+    "targetPriceUsd": 59.0,
+    "grossMarginPct": 63,
+    "currency": "USD",
+    "asOf": "2026-07-26",
+    "confidence": "browser-priced"
+  },
+  "bomCartId": "one-function-church-radio",
+  "softwarePlan": {
+    "summary": "ESP32 firmware boots to one preset stream, single button = play/stop, optional rotary volume hidden under caregiver lid.",
+    "stack": ["ESP-IDF or Arduino", "MAX98357A I2S", "3D printed enclosure"],
+    "modules": ["WiFi provisioning", "Preset URL storage", "Button state machine", "Watchdog auto-reconnect"],
+    "mvpScope": ["One stream", "One button", "Power LED", "Caregiver hidden reset"],
+    "nonGoals": ["Multi-station UI", "Touchscreen", "Voice assistant"],
+    "risks": ["WiFi dependence", "Stream URL changes", "Audio quality / speaker selection"]
+  },
+  "solved": ["Attractive low-cost BOM path identified via Amazon browser pricing"],
+  "unsolved": ["AM vs stream decision", "Enclosure ergonomics for arthritic hands"],
+  "nextActions": [
+    "Order-of-magnitude enclosure sketch",
+    "Pick one local church stream style example for demo",
+    "If greenlit, Codex terra high firmware skeleton"
+  ],
+  "artifacts": {
+    "spikeDir": null,
+    "docs": [],
+    "links": ["https://www.amazon.com/s?k=esp32+dev+board+max98357a"]
+  },
+  "scores": {"impact": 6, "feasibility": 8, "profit": 6, "fit": 9, "total": 7},
+  "notes": "Great quick hardware win / portfolio piece; probably not the biggest business."
+}

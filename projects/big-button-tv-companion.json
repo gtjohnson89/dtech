@@ -1,0 +1,106 @@
+{
+  "id": "big-button-tv-companion",
+  "title": "Big-button TV companion",
+  "status": "planning",
+  "priority": 1,
+  "created": "2026-07-26",
+  "updated": "2026-07-26",
+  "source": {
+    "group": "https://www.facebook.com/groups/397162319426193",
+    "firstSeen": "2026-07-26",
+    "themes": ["TV too complex", "remote failure", "smart menus break usability"]
+  },
+  "problem": "People living with dementia (and exhausted caregivers) cannot operate modern smart TVs. Too many inputs, apps, PVR menus, and fragile remotes. They need power/volume/one favorite channel or one streaming destination with almost zero choices.",
+  "solution": "A caregiver-configured TV companion: either (A) software+hub that locks a Fire TV / Android TV into a single destination with a 3-button physical remote enclosure, or (B) a simpler IR-only big-button path for non-streaming homes. Start with software config + 3D-printed remote shell; avoid medical claims.",
+  "whyWidespread": "Repeated caregiver posts about TV/remote failure are extremely common. Existing products (Flipper, EZclicker, JubileeTV) prove willingness to pay, but leave gaps: streaming lock-down, caregiver remote config, and dementia-safe defaults.",
+  "targetUser": "Adult children / spouses setting up TV for a person with moderate cognitive decline at home.",
+  "fitForGeorge": "Software configuration UX + optional companion app + 3D-printed remote enclosure. Can assemble kits and sell direct/Amazon/Etsy without inventing new silicon.",
+  "feasibility": {
+    "overall": 8,
+    "hardware": 8,
+    "software": 7,
+    "regulatory": 9,
+    "notes": "Consumer electronics accessory + software. Avoid medical device framing. IR learning and Fire TV sideloading are the main tech risks."
+  },
+  "market": {
+    "needSignal": "high",
+    "competition": [
+      "Flipper big-button remote (~$40)",
+      "EZclicker senior remotes (~$17-$21)",
+      "JubileeTV remote care system (~$199)",
+      "GE BigEZ / generic big-button remotes"
+    ],
+    "willingnessToPay": "Caregivers already pay $17-$40 for dumb big-button remotes and ~$200 for care systems. A $79-$149 configured kit is plausible.",
+    "distribution": ["amazon", "direct-to-caregiver", "etsy", "facebook-group-soft-launch"],
+    "profitHypothesis": "Prototype BOM under ~$180 if using Fire TV Cube path; productized IR-only kit BOM can land under ~$35 with printed shell. Software differentiation + setup service is the margin story, not commodity remote plastic."
+  },
+  "costs": {
+    "prototypeBomUsd": 176.97,
+    "unitBomUsd": 55.0,
+    "targetPriceUsd": 129.0,
+    "grossMarginPct": 57,
+    "currency": "USD",
+    "asOf": "2026-07-26",
+    "confidence": "browser-priced"
+  },
+  "bomCartId": "big-button-tv-companion",
+  "softwarePlan": {
+    "summary": "Caregiver web/app configures allowed destinations, volume ceiling, and power behavior. Device agent on Fire TV / Android TV enforces kiosk-like mode. Optional ESP/IR blaster path for dumb TVs.",
+    "stack": ["TypeScript", "local device agent", "optional React caregiver UI", "3D-printed remote shell CAD"],
+    "modules": [
+      "Caregiver setup wizard",
+      "Allowed-destination allowlist",
+      "Single-purpose remote input mapping",
+      "HDMI-CEC / IR power+volume bridge",
+      "Fail-safe factory restore for caregiver"
+    ],
+    "mvpScope": [
+      "One streaming destination or one input",
+      "Power + volume + home/favorite only",
+      "Caregiver PIN to exit",
+      "Printed 3-button shell around a cheap remote or ESP input board"
+    ],
+    "nonGoals": [
+      "Full universal remote ecosystem",
+      "Medical monitoring",
+      "Multi-room enterprise install"
+    ],
+    "risks": [
+      "Fire TV / Android TV policy changes blocking kiosk behavior",
+      "IR reliability across TV brands",
+      "Support burden if every living room is different"
+    ]
+  },
+  "solved": [
+    "Need is repeatedly confirmed in dementia tech group",
+    "Competitive price anchors collected from Amazon",
+    "Initial prototype BOM drafted with live browser prices"
+  ],
+  "unsolved": [
+    "Pick primary path: IR-only vs Fire TV lock-down vs hybrid",
+    "Validate whether caregivers prefer $40 simple remote or $129 configured system",
+    "Spike software kiosk feasibility on Fire TV / Android TV",
+    "Design first 3-button enclosure and button map"
+  ],
+  "nextActions": [
+    "Run Codex terra high spike: Android TV / Fire TV single-destination lock concept note + minimal architecture",
+    "Compare BOM for IR-only productized kit vs Fire TV Cube prototype path",
+    "Draft packaging/setup card copy for caregivers"
+  ],
+  "artifacts": {
+    "spikeDir": null,
+    "docs": [],
+    "links": [
+      "https://www.amazon.com/s?k=senior+big+button+tv+remote",
+      "https://www.amazon.com/s?k=amazon+fire+tv+cube"
+    ]
+  },
+  "scores": {
+    "impact": 9,
+    "feasibility": 8,
+    "profit": 8,
+    "fit": 9,
+    "total": 9
+  },
+  "notes": "Highest-priority project from first scan. Strong widespread need and clear kit/business shape."
+}

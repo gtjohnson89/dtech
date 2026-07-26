@@ -1,0 +1,76 @@
+{
+  "id": "big-button-tv-companion",
+  "projectId": "big-button-tv-companion",
+  "title": "Prototype cart — TV companion",
+  "updated": "2026-07-26",
+  "currency": "USD",
+  "pricingMode": "browser-research",
+  "vendorsPreferred": ["amazon", "other"],
+  "items": [
+    {
+      "name": "Fire TV Cube (current gen)",
+      "qty": 1,
+      "unitUsd": 139.99,
+      "totalUsd": 139.99,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=amazon+fire+tv+cube",
+      "sku": null,
+      "notes": "Browser-priced 2026-07-26. High-end prototype path for HDMI + IR control experiments.",
+      "required": false
+    },
+    {
+      "name": "Flipper big-button senior remote (competitive reference / fallback UX)",
+      "qty": 1,
+      "unitUsd": 39.95,
+      "totalUsd": 39.95,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=senior+big+button+tv+remote",
+      "sku": null,
+      "notes": "Browser-priced 2026-07-26. Useful as baseline competitor and possible temporary input device.",
+      "required": false
+    },
+    {
+      "name": "EZclicker big-button universal TV remote",
+      "qty": 1,
+      "unitUsd": 16.98,
+      "totalUsd": 16.98,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=senior+big+button+tv+remote",
+      "sku": null,
+      "notes": "Browser-priced 2026-07-26. Cheap reference hardware for shell/UX study.",
+      "required": true
+    },
+    {
+      "name": "PLA/PETG filament for remote enclosure (est. per shell)",
+      "qty": 1,
+      "unitUsd": 3.0,
+      "totalUsd": 3.0,
+      "vendor": "other",
+      "url": null,
+      "sku": null,
+      "notes": "Estimate from existing filament stock assumptions.",
+      "required": true
+    },
+    {
+      "name": "Hookup parts / adhesive / screws kit",
+      "qty": 1,
+      "unitUsd": 5.0,
+      "totalUsd": 5.0,
+      "vendor": "amazon",
+      "url": null,
+      "sku": null,
+      "notes": "Estimate.",
+      "required": true
+    }
+  ],
+  "subtotalUsd": 204.92,
+  "shippingEstimateUsd": 0,
+  "taxEstimateUsd": 0,
+  "grandTotalUsd": 204.92,
+  "missingItems": [
+    "Final IR blaster choice if not using Cube",
+    "Caregiver setup card / packaging",
+    "Production remote PCB if custom buttons later"
+  ],
+  "notes": "Grand total includes optional Fire TV Cube + competitor remotes for research. Lean prototype path can ignore Cube and stay near ~$25-$45 using EZclicker + printed shell."
+}

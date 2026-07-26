@@ -1,0 +1,50 @@
+{
+  "id": "auto-answer-caregiver-call",
+  "projectId": "auto-answer-caregiver-call",
+  "title": "Prototype cart — auto-answer phone kit",
+  "updated": "2026-07-26",
+  "currency": "USD",
+  "pricingMode": "estimate",
+  "vendorsPreferred": ["amazon", "other"],
+  "items": [
+    {
+      "name": "Cheap unlocked Android phone (placeholder)",
+      "qty": 1,
+      "unitUsd": 99.0,
+      "totalUsd": 99.0,
+      "vendor": "amazon",
+      "url": "https://www.amazon.com/s?k=unlocked+android+phone",
+      "sku": null,
+      "notes": "Placeholder until handset shortlist is browser-priced.",
+      "required": true
+    },
+    {
+      "name": "Rugged case + lanyard",
+      "qty": 1,
+      "unitUsd": 15.0,
+      "totalUsd": 15.0,
+      "vendor": "amazon",
+      "url": null,
+      "sku": null,
+      "notes": "Estimate.",
+      "required": true
+    },
+    {
+      "name": "Optional MDM / kiosk license (first year est.)",
+      "qty": 1,
+      "unitUsd": 25.0,
+      "totalUsd": 25.0,
+      "vendor": "other",
+      "url": "https://www.fully-kiosk.com/",
+      "sku": null,
+      "notes": "May be replaced by own app/device-owner mode.",
+      "required": false
+    }
+  ],
+  "subtotalUsd": 139.0,
+  "shippingEstimateUsd": 0,
+  "taxEstimateUsd": 0,
+  "grandTotalUsd": 139.0,
+  "missingItems": ["Exact handset model", "SIM/service plan assumptions", "Printed quick-start card"],
+  "notes": "Not cart-ready yet. Next pass should browser-price 2-3 concrete phones."
+}

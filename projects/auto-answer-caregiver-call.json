@@ -1,0 +1,74 @@
+{
+  "id": "auto-answer-caregiver-call",
+  "title": "Auto-answer caregiver call mode",
+  "status": "research",
+  "priority": 2,
+  "created": "2026-07-26",
+  "updated": "2026-07-26",
+  "source": {
+    "group": "https://www.facebook.com/groups/397162319426193",
+    "firstSeen": "2026-07-26",
+    "themes": ["cannot swipe to answer", "speakerphone volume", "family reach-out reliability"]
+  },
+  "problem": "The person living with dementia often cannot answer a smartphone call (swipe UI, volume, which app). Family members need a reliable way to open a loud speakerphone path from allowlisted contacts.",
+  "solution": "Dedicated Android mode or cheap spare-phone image: auto-answer allowlisted contacts, force speaker, giant hangup affordance, no app clutter. Could ship as setup guide + MDM/kiosk profile, or a dedicated app.",
+  "whyWidespread": "Call-answer failure is a classic middle-stage dementia friction point. Caregivers already buy simplified phones (e.g. RAZ Memory Cell Phone) and kiosk tools, so demand exists.",
+  "targetUser": "Long-distance or busy caregivers who need reliable audio check-ins.",
+  "fitForGeorge": "Mostly software / Android profile work. Hardware can be commodity unlocked Android phones.",
+  "feasibility": {
+    "overall": 7,
+    "hardware": 9,
+    "software": 6,
+    "regulatory": 7,
+    "notes": "Android auto-answer and call screening APIs vary by OEM/version. Accessibility + default-dialer constraints need a spike. Not a medical device if framed as convenience/kiosk."
+  },
+  "market": {
+    "needSignal": "high",
+    "competition": ["RAZ Memory Cell Phone", "Doro/Jitterbug style phones", "generic senior launchers", "Fully Kiosk / MDM kiosk tools"],
+    "willingnessToPay": "Families pay hundreds for specialized senior phones. A $29-$79 app or $149 configured phone kit could work.",
+    "distribution": ["direct-to-caregiver", "amazon-app-adjacent-guide", "facebook-group"],
+    "profitHypothesis": "Software margin is excellent if OEM permission hurdles are solved. Hardware-kit margin is thinner but easier to explain."
+  },
+  "costs": {
+    "prototypeBomUsd": 120.0,
+    "unitBomUsd": 90.0,
+    "targetPriceUsd": 179.0,
+    "grossMarginPct": 50,
+    "currency": "USD",
+    "asOf": "2026-07-26",
+    "confidence": "estimate"
+  },
+  "bomCartId": "auto-answer-caregiver-call",
+  "softwarePlan": {
+    "summary": "Android app + setup profile: contact allowlist, auto-answer, max speakerphone, kiosk launcher, remote config by caregiver.",
+    "stack": ["Kotlin/Android", "optional web caregiver portal", "MDM/kiosk fallback"],
+    "modules": ["Allowlist contacts", "Auto-answer service", "Speaker enforcement", "Kiosk launcher", "Caregiver remote settings"],
+    "mvpScope": ["One device profile", "Allowlist only", "Auto-answer + speaker", "Giant end-call button"],
+    "nonGoals": ["iOS version first", "Video care platform", "Fall detection medical claims"],
+    "risks": ["OEM call API differences", "Play policy", "False auto-answer from robocallers if allowlist fails"]
+  },
+  "solved": ["Problem validated from group scan", "Competitor category identified"],
+  "unsolved": [
+    "Which Android OEM/API path is most reliable in 2026",
+    "App-only vs configured-phone kit business model",
+    "Exact prototype handset choice and cart"
+  ],
+  "nextActions": [
+    "Codex terra high research spike on Android auto-answer / role/dialer options",
+    "Price 2-3 cheap unlocked Android handsets and Fully Kiosk / MDM options",
+    "Decide app-only MVP vs phone kit MVP"
+  ],
+  "artifacts": {
+    "spikeDir": null,
+    "docs": [],
+    "links": ["https://www.razmobility.com/solutions/memory-cellphone/", "https://www.fully-kiosk.com/"]
+  },
+  "scores": {
+    "impact": 9,
+    "feasibility": 7,
+    "profit": 8,
+    "fit": 9,
+    "total": 8
+  },
+  "notes": "Excellent software-shaped opportunity. Needs a hard feasibility spike before promising ship dates."
+}
