@@ -4,22 +4,18 @@
 <body>
   <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
   <header class="hero"><div class="shell">
-    <nav class="topbar" aria-label="Dashboard navigation"><a class="brand" href="#top"><span class="brand-mark">D</span><span><b>Build OS</b><small>Dementia tech lab</small></span></a><div class="top-links"><a href="#now">Resume</a><a href="#projects">Projects</a><a href="#research">Evidence</a></div></nav>
-  <div class="hero-grid" id="top"><div><p class="eyebrow amber">A practical dementia-tech workspace</p><h1>Make care<br><em>simpler.</em></h1><p class="hero-copy">Turn recurring caregiver frustrations into small, testable products—one focused project at a time.</p></div><aside class="hero-note"><p class="eyebrow">When you come back</p><b>This is your resume point.</b><p>It records what this lab is for, what has been learned, and the one move to make next.</p><hr><p class="muted">Last research scan: Jul 26, 2026 · 4 saved projects</p></aside></div>
+    <nav class="topbar" aria-label="Dashboard navigation"><a class="brand" href="#top"><span class="brand-mark">D</span><span><b>Build OS</b><small>Dementia tech lab</small></span></a><div class="top-links"><a href="#projects" data-open-section="projects">Projects</a><a href="#research" data-open-section="research">Evidence</a></div></nav>
+  <div class="hero-grid" id="top"><div><p class="eyebrow amber">Dementia Tech Lab</p><h1>Simple tools for<br><em>everyday care.</em></h1><p class="hero-copy">I’m exploring practical technology that helps people living with dementia and the people who care for them.</p></div></div>
   </div></header>
   <main class="shell">
-    <section id="now" class="now-section" aria-labelledby="now-title"><div class="section-heading" id="now-title">
-    <div><p class="eyebrow">Resume</p><h2>Pick up here</h2></div>
-    <p class="section-description">You do not need to review the whole dashboard first.</p>
-  </div><article class="resume-card">
-    <div class="resume-main"><p class="focus-label"><span class="signal-dot"></span> Current focus</p><p class="eyebrow">Priority 1 · Planning · last touched Jul 26, 2026</p><h2>Big-button TV companion</h2><p class="resume-note">Highest-priority project from first scan. Strong widespread need and clear kit/business shape.</p></div>
-    <section class="next-move"><span class="label">Do this next</span><p>Run Codex terra high spike: Android TV / Fire TV single-destination lock concept note + minimal architecture</p><a class="text-link" href="#projects">Open the full project brief <span aria-hidden="true">↓</span></a></section>
-    <div class="resume-checks"><section><h3>Who it helps</h3><p>Adult children / spouses setting up TV for a person with moderate cognitive decline at home.</p></section><section><h3>Already learned</h3><ul class="resume-list"><li>Need is repeatedly confirmed in dementia tech group</li><li>Competitive price anchors collected from Amazon</li></ul></section><section><h3>Still to decide</h3><p>Pick primary path: IR-only vs Fire TV lock-down vs hybrid</p></section></div>
-  </article><div class="quick-stats"><span><b>4</b> saved projects</span><span><b>4</b> strong opportunities found</span><span><b>$381.34</b> estimated prototype spend</span></div></section>
-    <section id="projects" class="projects-section" aria-labelledby="projects-title"><div class="section-heading" id="projects-title">
-    <div><p class="eyebrow">Explore</p><h2>Projects</h2></div>
-    <p class="section-description">Each card shows its next action. Open one only when you want the full brief.</p>
-  </div><div class="toolbar"><div class="filter-group" role="group" aria-label="Filter projects by status"><button class="filter-button active" type="button" data-status-filter="all">All <span>4</span></button><button class="filter-button" type="button" data-status-filter="planning">Planning <span>1</span></button><button class="filter-button" type="button" data-status-filter="research">Research <span>3</span></button></div><label class="sort-control" for="project-sort">Sort <select id="project-sort"><option value="priority">Priority first</option><option value="score">Score first</option><option value="title">Title A–Z</option></select></label></div><div class="project-grid-list" data-project-list><article class="project-card" data-project-card data-status="planning" data-priority="1" data-score="9">
+    <section id="now" class="now-section" aria-label="Current work"><article class="now-card">
+    <p class="focus-label"><span class="signal-dot"></span> What I’m working on now</p>
+    <h2>Big-button TV companion</h2>
+    <p>A simple caregiver-set TV controller with only the buttons a loved one needs.</p>
+    <div class="now-card-foot"><span class="status-badge status-planning">Planning</span><a class="text-link" href="#projects" data-open-section="projects">See the project <span aria-hidden="true">↓</span></a></div>
+  </article></section>
+    <section class="portal-list" aria-label="Explore the lab">
+      <details id="projects" class="portal-card"><summary><span><span class="portal-kicker">Explore</span><strong>Projects</strong><small>4 ideas in progress · see the next move for each</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="toolbar"><div class="filter-group" role="group" aria-label="Filter projects by status"><button class="filter-button active" type="button" data-status-filter="all">All <span>4</span></button><button class="filter-button" type="button" data-status-filter="planning">Planning <span>1</span></button><button class="filter-button" type="button" data-status-filter="research">Research <span>3</span></button></div><label class="sort-control" for="project-sort">Sort <select id="project-sort"><option value="priority">Priority first</option><option value="score">Score first</option><option value="title">Title A–Z</option></select></label></div><div class="project-grid-list" data-project-list><article class="project-card" data-project-card data-status="planning" data-priority="1" data-score="9">
     <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-details-0-big-button-tv-companion">
       <span class="project-head">
         <span>
@@ -143,11 +139,8 @@
       </div>
       <div class="project-foot"><span class="muted">Great quick hardware win / portfolio piece; probably not the biggest business.</span><span><a class="text-link" href="#cart-one-function-church-radio">View BOM cart <span aria-hidden="true">↓</span></a></span></div>
     </div>
-  </article></div><p class="filter-empty" data-filter-empty hidden>No projects match this filter.</p></section>
-    <section id="research" class="research-section" aria-labelledby="research-title"><div class="section-heading" id="research-title">
-    <div><p class="eyebrow">Look up</p><h2>Evidence &amp; costs</h2></div>
-    <p class="section-description">Supporting material for a project decision. It stays closed until you need it.</p>
-  </div><div class="research-columns"><div><h3 class="subsection-title">Cost sheets</h3><div class="cart-list"><article class="cart-card" id="cart-auto-answer-caregiver-call">
+  </article></div><p class="filter-empty" data-filter-empty hidden>No projects match this filter.</p></div></details>
+      <details id="research" class="portal-card"><summary><span><span class="portal-kicker">Reference</span><strong>Evidence & costs</strong><small>4 strong opportunities · 3 prototype cost sheets</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="research-columns"><div><h3 class="subsection-title">Cost sheets</h3><div class="cart-list"><article class="cart-card" id="cart-auto-answer-caregiver-call">
     <button class="disclosure-toggle cart-head" type="button" aria-expanded="false" aria-controls="cart-details-auto-answer-caregiver-call"><span><p class="eyebrow">estimate</p><h3>Prototype cart — auto-answer phone kit</h3><p class="muted">For Auto-answer caregiver call mode · 3 parts</p></span><span class="cart-total"><small>Estimated total</small><strong>$139.00</strong><span class="project-chevron" aria-hidden="true"></span></span></button>
     <div id="cart-details-auto-answer-caregiver-call" hidden><div class="table-wrap"><table><caption class="sr-only">Prototype cart — auto-answer phone kit bill of materials</caption><thead><tr><th scope="col">Item</th><th scope="col">Vendor</th><th scope="col">Qty</th><th scope="col">Unit</th><th scope="col">Total</th><th scope="col">Link</th></tr></thead><tbody><tr>
         <td><strong>Cheap unlocked Android phone (placeholder)</strong><small>Placeholder until handset shortlist is browser-priced.</small></td>
@@ -215,7 +208,7 @@
         <td><span class="muted">—</span></td>
       </tr></tbody></table></div>
     <div class="cart-summary"><div><span class="label">Subtotal</span><b>$204.92</b> <span class="muted">+ shipping $0.00 + tax $0.00</span></div><div><span class="label">Missing items</span><ul class="check-list"><li>Final IR blaster choice if not using Cube</li><li>Caregiver setup card / packaging</li><li>Production remote PCB if custom buttons later</li></ul></div></div><p class="cart-notes">Grand total includes optional Fire TV Cube + competitor remotes for research. Lean prototype path can ignore Cube and stay near ~$25-$45 using EZclicker + printed shell.</p></div>
-  </article></div></div><div><h3 class="subsection-title">Research scans</h3><article class="scan-card latest-scan" id=latest-scan>
+  </article></div></div><div><h3 class="subsection-title">Latest research</h3><article class="scan-card latest-scan" id=latest-scan>
     <button class="disclosure-toggle scan-head" type="button" aria-expanded="false" aria-controls="scan-details-2026-07-26"><span><p class="eyebrow">Latest daily scan</p><h3>Jul 26, 2026</h3><div class="meta-row"><span class="status-badge status-access">Access OK</span><span class="pill">5 ideas</span><span class="pill">4 strong</span></div></span><span class="disclosure-side"><span class="muted">View details</span><span class="project-chevron" aria-hidden="true"></span></span></button>
     <div class="scan-body" id="scan-details-2026-07-26" hidden><section class="theme-panel"><h4>Themes surfaced</h4><div class="theme-cloud"><span>raised toilet seat splash/guard/handle needs</span><span>TV too complex / remote failure without wifi</span><span>auto-answer speakerphone calls</span><span>locked-down phone with texts/camera/calendar but strong scam blocking</span><span>simple TV with no smart menus</span><span>one-button AM radio / church service listening</span><span>Echo Show setup friction and account model</span></div><p class="scan-notes"><a class="text-link" href="https://www.facebook.com/groups/397162319426193" target="_blank" rel="noopener noreferrer">Open source group <span aria-hidden="true">↗</span></a></p><p class="scan-notes">Retargeted daily watch from previous dementia support group to this tech/aids group. George already posted seeking unmet tech needs; strong reply cluster around phones/TV simplicity.</p></section><section class="ideas-panel"><div class="subhead"><h4>Ideas by score</h4><span class="muted">5 opportunities</span></div><div class="ideas-grid"><article class="idea-card score-high" style="--order:0">
     <div class="idea-head"><h3>Big-button TV companion</h3><div class="idea-badges"><span class="score-badge">Score 9</span><span class="effort-badge effort-m">Effort M</span></div></div>
@@ -233,8 +226,9 @@
     <div class="idea-head"><h3>Toilet splash guard + raised seat kit research</h3><div class="idea-badges"><span class="score-badge">Score 5</span><span class="effort-badge effort-s">Effort S</span></div></div>
     <dl class="idea-details"><div class="field "><dt>Problem</dt><dd>Raised seat + handles still allow urine between seat and bowl/floor</dd></div><div class="field "><dt>Build angle</dt><dd>Possibly 3D-printed splash guard prototype, but hygiene/materials constraints; lower priority vs software aids</dd></div></dl>
   </article></div></section></div>
-  </article></div></div></section>
+  </article></div></div></div></details>
+    </section>
   </main>
-  <footer class="shell footer"><p><b>Dementia Tech Build OS</b> · local static dashboard</p><p>Updated Jul 26, 2026, 9:18 AM CT · rebuild with <code>node dtech/build.js</code></p></footer>
+  <footer class="shell footer"><p><b>Dementia Tech Build OS</b> · local static dashboard</p><p>Updated Jul 26, 2026, 9:21 AM CT · rebuild with <code>node dtech/build.js</code></p></footer>
   <script src="assets/app.js"></script>
 </body></html>

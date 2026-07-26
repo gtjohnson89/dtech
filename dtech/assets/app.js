@@ -46,6 +46,16 @@ document.addEventListener("DOMContentLoaded", function () {
       if (details) details.hidden = expanded;
     });
   });
+  document.querySelectorAll("[data-open-section]").forEach(function (control) {
+    control.addEventListener("click", function () {
+      var section = document.getElementById(control.getAttribute("data-open-section"));
+      if (section && section.tagName === "DETAILS") section.open = true;
+    });
+  });
+  if (window.location.hash) {
+    var linkedSection = document.querySelector(window.location.hash);
+    if (linkedSection && linkedSection.tagName === "DETAILS") linkedSection.open = true;
+  }
   if (sort) sort.addEventListener("change", refresh);
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener("click", function (event) {
