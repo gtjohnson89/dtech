@@ -1,0 +1,36 @@
+{
+  "id": "wearable-gps-fall-detection",
+  "title": "Wearable GPS + fall detection people will actually wear",
+  "status": "active",
+  "domain": "safety",
+  "summary": "Repeated demand for GPS + fall detection + sometimes two-way talk, but compliance/charging/shower removal repeatedly breaks the solution.",
+  "firstSeen": "2026-07-15",
+  "lastNewSignalAt": "2026-07-17",
+  "aliases": [
+    "gps watch",
+    "fall detection watch",
+    "theora",
+    "apple watch fall"
+  ],
+  "evidenceDates": [
+    "2026-07-15",
+    "2026-07-17"
+  ],
+  "rollup": {
+    "uniqueSignals": 4,
+    "totalSignals": 4,
+    "averageSeverity": 4.0,
+    "engagementProxy": 61,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 100,
+    "opportunity": 92.0,
+    "buildability": 2,
+    "strategicFit": 3,
+    "severity": 4.0,
+    "confidence": "strong",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

@@ -14,7 +14,8 @@
       "multi-function radios too hard"
     ],
     "problemIds": [
-      "one-button-church-radio"
+      "one-button-church-radio",
+      "offline-audiobook-sleep-aid"
     ]
   },
   "problem": "Multi-function radios/CD players overwhelm users. Some families only need one trusted audio source (church service, AM station, hymn stream) with a single giant button.",

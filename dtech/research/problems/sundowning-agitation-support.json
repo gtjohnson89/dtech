@@ -1,0 +1,33 @@
+{
+  "id": "sundowning-agitation-support",
+  "title": "Sundowning agitation and evening routine support",
+  "status": "watching",
+  "domain": "behavior-support",
+  "summary": "Evening wandering/agitation prompts need for sleep regulation, sensory routines, and trigger removal more than pure gadgetry.",
+  "firstSeen": "2026-07-17",
+  "lastNewSignalAt": "2026-07-17",
+  "aliases": [
+    "sundowning",
+    "evening agitation"
+  ],
+  "evidenceDates": [
+    "2026-07-17"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 4.0,
+    "engagementProxy": 7,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 66.1,
+    "opportunity": 66.3,
+    "buildability": 2,
+    "strategicFit": 2,
+    "severity": 4.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

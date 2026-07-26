@@ -4,7 +4,7 @@
   "status": "active",
   "domain": "communication",
   "summary": "Standard smartphones expose search, ads, app stores, and scam pathways. Caregivers want calls/texts/camera/calendar with hard blocking and truly simple allowlists.",
-  "firstSeen": "2026-07-24",
+  "firstSeen": "2026-07-14",
   "lastNewSignalAt": "2026-07-25",
   "aliases": [
     "block scams on phone",
@@ -12,24 +12,25 @@
     "inappropriate content phone"
   ],
   "evidenceDates": [
+    "2026-07-14",
     "2026-07-25"
   ],
   "rollup": {
-    "uniqueSignals": 1,
-    "totalSignals": 1,
-    "averageSeverity": 5.0,
-    "engagementProxy": 1,
+    "uniqueSignals": 2,
+    "totalSignals": 2,
+    "averageSeverity": 4.5,
+    "engagementProxy": 10,
     "linkedProjectIds": [
       "scam-safe-senior-launcher"
     ]
   },
   "scores": {
-    "need": 78.3,
+    "need": 91.5,
     "opportunity": 100,
     "buildability": 3,
     "strategicFit": 5,
-    "severity": 5.0,
-    "confidence": "thin",
+    "severity": 4.5,
+    "confidence": "moderate",
     "calculatedAt": "2026-07-26"
   },
   "notes": "Seeded from 14-day Facebook group backfill + existing project map."

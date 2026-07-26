@@ -4,7 +4,7 @@
   "status": "watching",
   "domain": "setup-support",
   "summary": "Useful devices like Echo Show create new friction: household accounts, Drop In settings, purchase risk, and setup complexity. Caregivers need simpler account models and guided setup.",
-  "firstSeen": "2026-07-23",
+  "firstSeen": "2026-07-17",
   "lastNewSignalAt": "2026-07-23",
   "aliases": [
     "echo show setup",
@@ -12,22 +12,23 @@
     "amazon account for LO"
   ],
   "evidenceDates": [
+    "2026-07-17",
     "2026-07-23"
   ],
   "rollup": {
-    "uniqueSignals": 1,
-    "totalSignals": 1,
+    "uniqueSignals": 2,
+    "totalSignals": 2,
     "averageSeverity": 3.0,
-    "engagementProxy": 23,
+    "engagementProxy": 98,
     "linkedProjectIds": []
   },
   "scores": {
-    "need": 68.5,
-    "opportunity": 67.6,
+    "need": 100,
+    "opportunity": 85.0,
     "buildability": 2,
     "strategicFit": 2,
     "severity": 3.0,
-    "confidence": "thin",
+    "confidence": "moderate",
     "calculatedAt": "2026-07-26"
   },
   "notes": "Seeded from 14-day Facebook group backfill + existing project map."

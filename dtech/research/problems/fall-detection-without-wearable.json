@@ -1,0 +1,33 @@
+{
+  "id": "fall-detection-without-wearable",
+  "title": "Fall detection that does not require wearing a device",
+  "status": "active",
+  "domain": "safety",
+  "summary": "Falls happen when wearables are off (night/shower). Caregivers want wall/room sensors or inactivity detection that still works.",
+  "firstSeen": "2026-07-15",
+  "lastNewSignalAt": "2026-07-15",
+  "aliases": [
+    "wall mounted fall detector",
+    "no wearable fall"
+  ],
+  "evidenceDates": [
+    "2026-07-15"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 5.0,
+    "engagementProxy": 18,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 76.3,
+    "opportunity": 87.0,
+    "buildability": 3,
+    "strategicFit": 3,
+    "severity": 5.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

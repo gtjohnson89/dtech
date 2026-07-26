@@ -1,0 +1,85 @@
+{
+  "id": "fb-tech-aids-backfill-deep-2026-07-26",
+  "kind": "backfill-deep",
+  "windowDays": 14,
+  "startedAt": "2026-07-26T10:03:00-05:00",
+  "completedAt": "2026-07-26T10:12:00-05:00",
+  "source": "Technology and aids for dementia",
+  "group": "https://www.facebook.com/groups/397162319426193",
+  "accessOk": true,
+  "method": "openclaw-browser-feed-only-see-more-scroll",
+  "fetchedPostsApprox": 85,
+  "newObservations": 15,
+  "duplicatesSkipped": 0,
+  "problemsTouched": [
+    "echo-touchscreen-lockdown",
+    "fall-detection-without-wearable",
+    "home-vitals-spot-check",
+    "offline-audiobook-sleep-aid",
+    "picture-based-communication",
+    "scam-and-content-unsafe-phone",
+    "shower-water-auto-shutoff",
+    "simple-pausable-digital-photo-frame",
+    "smart-home-setup-friction",
+    "sundowning-agitation-support",
+    "tablet-game-ad-and-call-lockdown",
+    "temporary-home-internet-for-care",
+    "tv-remote-and-menu-confusion",
+    "vision-related-hallucinations-cbs",
+    "wandering-exit-alerts",
+    "wearable-gps-fall-detection"
+  ],
+  "topProblems": [
+    {
+      "id": "wearable-gps-fall-detection",
+      "need": 100,
+      "title": "Wearable GPS + fall detection people will actually wear"
+    },
+    {
+      "id": "wandering-exit-alerts",
+      "need": 100,
+      "title": "Exit/wandering detection when doors are used unexpectedly"
+    },
+    {
+      "id": "tv-remote-and-menu-confusion",
+      "need": 100,
+      "title": "TV is too complex; need power/volume/one-channel only"
+    },
+    {
+      "id": "smart-home-setup-friction",
+      "need": 100,
+      "title": "Echo/Show and smart-home setup is too hard for caregivers"
+    },
+    {
+      "id": "scam-and-content-unsafe-phone",
+      "need": 91.5,
+      "title": "Phones expose scams, junk, and unsafe content"
+    },
+    {
+      "id": "simple-physical-texting",
+      "need": 89.1,
+      "title": "Need simple physical-keyboard texting without smartphone complexity"
+    },
+    {
+      "id": "echo-touchscreen-lockdown",
+      "need": 81.8,
+      "title": "Lock down Echo Show touchscreen from accidental use"
+    },
+    {
+      "id": "simple-pausable-digital-photo-frame",
+      "need": 80.5,
+      "title": "Nearly buttonless digital photo frame that can pause"
+    }
+  ],
+  "notes": "Deeper chronological feed pass after modal recovery. Used feed-only See more + scroll. Avoided View more comments/answers and post clicks. Documented errors/resolutions under research/docs/.",
+  "errors": [
+    {
+      "error": "Post modal/permalink interruption left browser parked mid-research",
+      "resolution": "Escape/Close immediately; navigate back to chronological feed; never leave dirty browser state"
+    },
+    {
+      "error": "Clicking View more comments/answers often opens full post overlay",
+      "resolution": "Only click See more for truncated text; harvest inline comments already visible"
+    }
+  ]
+}

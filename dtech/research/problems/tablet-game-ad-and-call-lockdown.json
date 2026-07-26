@@ -1,0 +1,36 @@
+{
+  "id": "tablet-game-ad-and-call-lockdown",
+  "title": "Lock iPad/watch against scams while keeping games",
+  "status": "active",
+  "domain": "communication",
+  "summary": "Assistive Access on iPhone is not enough; iPad/watch still expose calls/texts/Safari and in-game ads/scams while families want games preserved.",
+  "firstSeen": "2026-07-14",
+  "lastNewSignalAt": "2026-07-14",
+  "aliases": [
+    "ipad assistive access",
+    "block safari keep games",
+    "watch calls leak"
+  ],
+  "evidenceDates": [
+    "2026-07-14"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 4.0,
+    "engagementProxy": 9,
+    "linkedProjectIds": [
+      "scam-safe-senior-launcher"
+    ]
+  },
+  "scores": {
+    "need": 64.3,
+    "opportunity": 87.4,
+    "buildability": 3,
+    "strategicFit": 4,
+    "severity": 4.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

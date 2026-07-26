@@ -1,0 +1,33 @@
+{
+  "id": "vision-related-hallucinations-cbs",
+  "title": "Vision-loss hallucinations mistaken for worsening dementia",
+  "status": "watching",
+  "domain": "caregiver-education",
+  "summary": "Caregivers need better framing when visual hallucinations may be Charles Bonnet-related vision loss rather than pure dementia progression.",
+  "firstSeen": "2026-07-18",
+  "lastNewSignalAt": "2026-07-18",
+  "aliases": [
+    "charles bonnet",
+    "visual hallucinations"
+  ],
+  "evidenceDates": [
+    "2026-07-18"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 3.0,
+    "engagementProxy": 8,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 59.2,
+    "opportunity": 47.6,
+    "buildability": 1,
+    "strategicFit": 1,
+    "severity": 3.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

@@ -5,7 +5,7 @@
   "domain": "entertainment",
   "summary": "Caregivers need a TV experience reduced to power, volume, and one or a few channels. Smart menus, PVRs, streaming UIs, and multi-button remotes repeatedly break independent use.",
   "firstSeen": "2026-07-12",
-  "lastNewSignalAt": "2026-07-26",
+  "lastNewSignalAt": "2026-07-25",
   "aliases": [
     "simple tv",
     "big button remote",
@@ -19,10 +19,10 @@
     "2026-07-25"
   ],
   "rollup": {
-    "uniqueSignals": 3,
-    "totalSignals": 3,
-    "averageSeverity": 4.67,
-    "engagementProxy": 28,
+    "uniqueSignals": 4,
+    "totalSignals": 4,
+    "averageSeverity": 4.5,
+    "engagementProxy": 44,
     "linkedProjectIds": [
       "big-button-tv-companion"
     ]
@@ -32,8 +32,8 @@
     "opportunity": 100,
     "buildability": 4,
     "strategicFit": 5,
-    "severity": 4.67,
-    "confidence": "moderate",
+    "severity": 4.5,
+    "confidence": "strong",
     "calculatedAt": "2026-07-26"
   },
   "notes": "Seeded from 14-day Facebook group backfill + existing project map."

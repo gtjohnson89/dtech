@@ -1,0 +1,33 @@
+{
+  "id": "echo-touchscreen-lockdown",
+  "title": "Lock down Echo Show touchscreen from accidental use",
+  "status": "watching",
+  "domain": "setup-support",
+  "summary": "Echo Show has no true touchscreen disable; high-engagement DIY is physical plexiglass overlay while keeping app/voice control.",
+  "firstSeen": "2026-07-17",
+  "lastNewSignalAt": "2026-07-17",
+  "aliases": [
+    "echo show plexiglass",
+    "disable echo touchscreen"
+  ],
+  "evidenceDates": [
+    "2026-07-17"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 3.0,
+    "engagementProxy": 75,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 81.8,
+    "opportunity": 83.0,
+    "buildability": 3,
+    "strategicFit": 2,
+    "severity": 3.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

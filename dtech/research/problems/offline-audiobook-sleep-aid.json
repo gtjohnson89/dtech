@@ -1,0 +1,36 @@
+{
+  "id": "offline-audiobook-sleep-aid",
+  "title": "Offline audiobook / sleep audio without open internet",
+  "status": "active",
+  "domain": "entertainment",
+  "summary": "When internet is intentionally disabled for safety, caregivers still need a simple offline audiobook/sleep-audio path recommended by clinicians.",
+  "firstSeen": "2026-07-17",
+  "lastNewSignalAt": "2026-07-17",
+  "aliases": [
+    "books on tape",
+    "offline audiobook",
+    "airplane mode phone"
+  ],
+  "evidenceDates": [
+    "2026-07-17"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 3.0,
+    "engagementProxy": 40,
+    "linkedProjectIds": [
+      "one-function-church-radio"
+    ]
+  },
+  "scores": {
+    "need": 69.6,
+    "opportunity": 98.3,
+    "buildability": 4,
+    "strategicFit": 4,
+    "severity": 3.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Added from deeper chronological feed pass 2026-07-26."
+}

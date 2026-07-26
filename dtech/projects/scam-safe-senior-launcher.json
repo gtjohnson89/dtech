@@ -14,7 +14,8 @@
       "need texts/camera/calendar only"
     ],
     "problemIds": [
-      "scam-and-content-unsafe-phone"
+      "scam-and-content-unsafe-phone",
+      "tablet-game-ad-and-call-lockdown"
     ]
   },
   "problem": "Standard phones expose search, ads, unknown callers, and app stores. Caregivers want a locked experience with calls/texts/camera/calendar only and aggressive scam blocking.",

@@ -4,7 +4,7 @@
   "status": "watching",
   "domain": "safety",
   "summary": "Loved ones leave home unexpectedly or with confused destination intent. Caregivers need reliable door/exit awareness without over-restricting daily life.",
-  "firstSeen": "2026-07-19",
+  "firstSeen": "2026-07-17",
   "lastNewSignalAt": "2026-07-19",
   "aliases": [
     "door sensors",
@@ -12,22 +12,23 @@
     "going home wandering"
   ],
   "evidenceDates": [
+    "2026-07-17",
     "2026-07-19"
   ],
   "rollup": {
-    "uniqueSignals": 1,
-    "totalSignals": 1,
-    "averageSeverity": 5.0,
-    "engagementProxy": 28,
+    "uniqueSignals": 3,
+    "totalSignals": 3,
+    "averageSeverity": 4.67,
+    "engagementProxy": 63,
     "linkedProjectIds": []
   },
   "scores": {
-    "need": 83.0,
-    "opportunity": 90.7,
+    "need": 100,
+    "opportunity": 100,
     "buildability": 3,
     "strategicFit": 3,
-    "severity": 5.0,
-    "confidence": "thin",
+    "severity": 4.67,
+    "confidence": "moderate",
     "calculatedAt": "2026-07-26"
   },
   "notes": "Seeded from 14-day Facebook group backfill + existing project map."
