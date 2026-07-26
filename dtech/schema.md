@@ -14,11 +14,44 @@ This folder is George’s operating system for dementia-tech opportunity discove
 
 ## Files
 - `log.jsonl` — daily scan snapshots (append-only)
+- `research/problems/<slug>.json` — canonical durable caregiver problems; this is the primary Research organizing unit
+- `research/observations/*.jsonl` — dated evidence paraphrases linked to problems by `problemIds`
+- `research/runs/<id>.json` — ingestion/run metadata such as access status, timestamps, and touched problems
 - `projects/<slug>.json` — one file per project
 - `carts/<slug>.json` — shopping cart / BOM snapshots for a project
 - `spikes/<slug>/` — optional Codex feasibility code/notes
 - `index.html` + `assets/` — generated static dashboard
 - `README.md` — runbook + model routing
+
+## Problem-centric research model
+Problems are durable caregiver themes ranked by `scores.need` or `scores.opportunity`. A problem may accumulate observations across many dates and may link to zero or more projects through `rollup.linkedProjectIds`; projects also declare the relationship in `source.problemIds`. Research runs and observation dates explain where the evidence came from, but days/runs are ingestion metadata rather than the primary dashboard UX. `log.jsonl` remains an optional legacy history fallback and is shown separately from the problem list.
+
+### Problem JSON shape
+```json
+{
+  "id": "tv-remote-and-menu-confusion",
+  "title": "TV is too complex; need power/volume/one-channel only",
+  "status": "active|watching|parked",
+  "domain": "entertainment",
+  "summary": "...",
+  "firstSeen": "YYYY-MM-DD",
+  "lastNewSignalAt": "YYYY-MM-DD",
+  "evidenceDates": ["YYYY-MM-DD"],
+  "rollup": {
+    "uniqueSignals": 3,
+    "totalSignals": 3,
+    "averageSeverity": 4.67,
+    "engagementProxy": 28,
+    "linkedProjectIds": ["big-button-tv-companion"]
+  },
+  "scores": {
+    "need": 0,
+    "opportunity": 0,
+    "severity": 0,
+    "confidence": "thin|moderate|strong"
+  }
+}
+```
 
 ## Project JSON shape
 ```json
@@ -32,7 +65,8 @@ This folder is George’s operating system for dementia-tech opportunity discove
   "source": {
     "group": "https://www.facebook.com/groups/397162319426193",
     "firstSeen": "YYYY-MM-DD",
-    "themes": ["..."]
+    "themes": ["..."],
+    "problemIds": ["tv-remote-and-menu-confusion"]
   },
   "problem": "...",
   "solution": "...",

@@ -8,7 +8,14 @@
   "source": {
     "group": "https://www.facebook.com/groups/397162319426193",
     "firstSeen": "2026-07-26",
-    "themes": ["scams", "too many apps", "need texts/camera/calendar only"]
+    "themes": [
+      "scams",
+      "too many apps",
+      "need texts/camera/calendar only"
+    ],
+    "problemIds": [
+      "scam-and-content-unsafe-phone"
+    ]
   },
   "problem": "Standard phones expose search, ads, unknown callers, and app stores. Caregivers want a locked experience with calls/texts/camera/calendar only and aggressive scam blocking.",
   "solution": "Custom Android launcher + allowlists + optional DNS/firewall + caregiver admin PIN. Can pair with the auto-answer project later.",
@@ -24,9 +31,17 @@
   },
   "market": {
     "needSignal": "high",
-    "competition": ["senior launchers", "MDM kiosk tools", "carrier senior phones"],
+    "competition": [
+      "senior launchers",
+      "MDM kiosk tools",
+      "carrier senior phones"
+    ],
     "willingnessToPay": "Subscription ($5-$15/mo) or one-time app ($20-$60) plus optional setup fee.",
-    "distribution": ["play store if policy allows", "sideload kit", "direct setup service"],
+    "distribution": [
+      "play store if policy allows",
+      "sideload kit",
+      "direct setup service"
+    ],
     "profitHypothesis": "Software/subscription economics are attractive if retention is good."
   },
   "costs": {
@@ -41,19 +56,54 @@
   "bomCartId": null,
   "softwarePlan": {
     "summary": "Android launcher MVP with allowlisted apps/contacts/sites and caregiver PIN.",
-    "stack": ["Kotlin/Android"],
-    "modules": ["Launcher home", "Allowlists", "PIN escape", "Unknown caller filter hooks"],
-    "mvpScope": ["Calls", "SMS", "Camera", "Simple calendar", "Caregiver pin"],
-    "nonGoals": ["Full MDM suite", "Banking protection claims"],
-    "risks": ["Play policy", "Users bypassing kiosk", "False sense of security"]
+    "stack": [
+      "Kotlin/Android"
+    ],
+    "modules": [
+      "Launcher home",
+      "Allowlists",
+      "PIN escape",
+      "Unknown caller filter hooks"
+    ],
+    "mvpScope": [
+      "Calls",
+      "SMS",
+      "Camera",
+      "Simple calendar",
+      "Caregiver pin"
+    ],
+    "nonGoals": [
+      "Full MDM suite",
+      "Banking protection claims"
+    ],
+    "risks": [
+      "Play policy",
+      "Users bypassing kiosk",
+      "False sense of security"
+    ]
   },
-  "solved": ["Clear problem framing from group"],
-  "unsolved": ["Monetization: one-time vs sub", "Whether to merge with auto-answer project"],
+  "solved": [
+    "Clear problem framing from group"
+  ],
+  "unsolved": [
+    "Monetization: one-time vs sub",
+    "Whether to merge with auto-answer project"
+  ],
   "nextActions": [
     "Competitive teardown of top senior launchers",
     "Decide if this is standalone or a mode inside auto-answer kit"
   ],
-  "artifacts": {"spikeDir": null, "docs": [], "links": []},
-  "scores": {"impact": 8, "feasibility": 7, "profit": 8, "fit": 9, "total": 8},
+  "artifacts": {
+    "spikeDir": null,
+    "docs": [],
+    "links": []
+  },
+  "scores": {
+    "impact": 8,
+    "feasibility": 7,
+    "profit": 8,
+    "fit": 9,
+    "total": 8
+  },
   "notes": "Strong, but may collapse into the auto-answer phone kit as one product line."
 }

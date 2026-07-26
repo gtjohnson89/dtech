@@ -1,0 +1,34 @@
+{
+  "id": "tv-audio-for-hearing-loss",
+  "title": "TV audio for hard-of-hearing without blasting the room",
+  "status": "watching",
+  "domain": "entertainment",
+  "summary": "Couples need a simple way for one hard-of-hearing person to hear TV clearly while the other keeps volume low. Bluetooth switching and settings menus are too hard.",
+  "firstSeen": "2026-07-21",
+  "lastNewSignalAt": "2026-07-21",
+  "aliases": [
+    "tv headphones",
+    "hearing aid tv streamer",
+    "tv too loud for partner"
+  ],
+  "evidenceDates": [
+    "2026-07-21"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 3.0,
+    "engagementProxy": 41,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 73.2,
+    "opportunity": 70.2,
+    "buildability": 2,
+    "strategicFit": 2,
+    "severity": 3.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Seeded from 14-day Facebook group backfill + existing project map."
+}

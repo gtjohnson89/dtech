@@ -11,6 +11,9 @@ const DATA_DIR = SITE_DIR;
 const LOG_PATH = path.join(DATA_DIR, "log.jsonl");
 const PROJECTS_DIR = path.join(DATA_DIR, "projects");
 const CARTS_DIR = path.join(DATA_DIR, "carts");
+const PROBLEMS_DIR = path.join(DATA_DIR, "research", "problems");
+const OBSERVATIONS_DIR = path.join(DATA_DIR, "research", "observations");
+const RUNS_DIR = path.join(DATA_DIR, "research", "runs");
 const OUT_HTML = path.join(SITE_DIR, "index.html");
 const ASSETS_DIR = path.join(SITE_DIR, "assets");
 
@@ -56,6 +59,40 @@ function readLog(filePath) {
     }
   });
   return entries.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function readJsonLines(filePath, sortField = "observedAt") {
+  if (!fs.existsSync(filePath)) return [];
+  const entries = [];
+  let raw = "";
+  try {
+    raw = fs.readFileSync(filePath, "utf8");
+  } catch (error) {
+    console.warn(`Could not read ${filePath}: ${error.message}`);
+    return entries;
+  }
+  raw.split(/\r?\n/).forEach((line, index) => {
+    const trimmed = line.trim();
+    if (!trimmed) return;
+    try {
+      entries.push(JSON.parse(trimmed));
+    } catch (error) {
+      console.warn(`Skipping invalid JSONL line ${index + 1} in ${filePath}: ${error.message}`);
+    }
+  });
+  return entries.sort((a, b) => String(b[sortField] || "").localeCompare(String(a[sortField] || "")));
+}
+
+function readJsonlDirectory(dirPath) {
+  if (!fs.existsSync(dirPath)) return [];
+  let names = [];
+  try {
+    names = fs.readdirSync(dirPath).filter((name) => name.endsWith(".jsonl")).sort();
+  } catch (error) {
+    console.warn(`Could not read ${dirPath}: ${error.message}`);
+    return [];
+  }
+  return names.flatMap((name) => readJsonLines(path.join(dirPath, name)));
 }
 
 function esc(value) {
@@ -171,7 +208,7 @@ function renderScoreStrip(scores = {}) {
   return `<span class="score-strip">${fields.map(([label, value]) => `<span><b>${esc(number(value))}</b><small>${esc(label)}</small></span>`).join("")}<span class="score-total"><b>${esc(number(scores.total))}</b><small>Total</small></span></span>`;
 }
 
-function renderProject(project, cartById, index) {
+function renderProject(project, cartById, index, problemById = new Map()) {
   const scores = project.scores || {};
   const feasibility = project.feasibility || {};
   const market = project.market || {};
@@ -184,6 +221,12 @@ function renderProject(project, cartById, index) {
     : "";
   const detailsId = `project-details-${index}-${statusClass(projectId)}`;
   const nextAction = Array.isArray(project.nextActions) && project.nextActions[0] ? project.nextActions[0] : "Choose the next concrete action.";
+  const linkedProblemIds = project.source && Array.isArray(project.source.problemIds) ? project.source.problemIds : [];
+  const linkedProblems = linkedProblemIds.map((id) => problemById.get(id)).filter(Boolean);
+  const linkedProblemsMarkup = linkedProblems.length
+    ? linkedProblems.map((problem) => `<a href="#problem-${esc(statusClass(problem.id))}" data-open-section="research" data-open-problem="${esc(statusClass(problem.id))}">${esc(problem.title)} <span aria-hidden="true">→</span></a>`).join("<br>")
+    : text(null, "No linked problem record");
+  const linkedProblemLabel = linkedProblems.length === 1 ? "Linked problem theme" : "Linked problem themes";
 
   return `<article class="project-card" id="project-${esc(statusClass(projectId))}" data-project-card data-status="${esc(String(project.status || "unknown").toLowerCase())}" data-priority="${esc(number(project.priority, "99"))}" data-score="${esc(number(scores.total, "0"))}">
     <button class="project-toggle" type="button" aria-expanded="false" aria-controls="${esc(detailsId)}">
@@ -199,6 +242,7 @@ function renderProject(project, cartById, index) {
     <div class="project-details" id="${esc(detailsId)}" hidden>
       <div class="project-summary">
       ${field("Problem", text(project.problem))}
+      ${field(linkedProblemLabel, linkedProblemsMarkup)}
       ${field("Solution", text(project.solution))}
       ${field("Built for", text(project.targetUser))}
       ${field("George fit", text(project.fitForGeorge))}
@@ -215,6 +259,50 @@ function renderProject(project, cartById, index) {
       <section><h4 class="list-heading next-heading">Next actions</h4>${list(project.nextActions)}</section>
       </div>
 ${costPanel ? `      ${costPanel}\n` : ""}      <div class="project-foot"><span class="muted">${esc(project.notes || "Portfolio record")}</span></div>
+    </div>
+  </article>`;
+}
+
+function renderProblem(problem, observations, projects, index) {
+  const scores = problem.scores || {};
+  const rollup = problem.rollup || {};
+  const problemId = problem.id || problem.title || `problem-${index}`;
+  const matchingObservations = observations
+    .filter((observation) => Array.isArray(observation.problemIds) && observation.problemIds.includes(problemId))
+    .sort((a, b) => String(b.observedAt || b.publishedAt || "").localeCompare(String(a.observedAt || a.publishedAt || "")));
+  const linkedProjectIds = Array.isArray(rollup.linkedProjectIds) ? rollup.linkedProjectIds : [];
+  const linkedProjects = linkedProjectIds.map((id) => projects.find((project) => project.id === id)).filter(Boolean);
+  const detailsId = `problem-details-${index}-${statusClass(problemId)}`;
+  const evidenceDates = Array.isArray(problem.evidenceDates) ? problem.evidenceDates : [];
+  const lastSignal = problem.lastNewSignalAt || evidenceDates[evidenceDates.length - 1] || problem.firstSeen;
+  const scoreFields = [
+    ["Need", scores.need],
+    ["Opportunity", scores.opportunity],
+    ["Severity", scores.severity],
+    ["Confidence", scores.confidence],
+    ["Signals", rollup.totalSignals ?? rollup.uniqueSignals],
+    ["Engagement proxy", rollup.engagementProxy],
+  ];
+  const projectMarkup = linkedProjects.length
+    ? linkedProjects.map((project) => `<a href="#project-${esc(statusClass(project.id || project.title))}" data-open-section="projects" data-open-project="${esc(statusClass(project.id || project.title))}">${esc(project.title)} <span aria-hidden="true">→</span></a>`).join("<br>")
+    : `<span class="muted">No linked projects yet</span>`;
+  const observationMarkup = matchingObservations.length
+    ? `<ul class="observation-list">${matchingObservations.slice(0, 4).map((observation) => `<li><span class="observation-date">${esc(formatDate(observation.observedAt || observation.publishedAt))}</span><span>${esc(observation.summary || "No paraphrase recorded.")}</span></li>`).join("")}</ul>`
+    : `<p class="muted">No observations recorded for this problem.</p>`;
+
+  return `<article class="problem-card" id="problem-${esc(statusClass(problemId))}" data-problem-card data-need="${esc(number(scores.need, "0"))}" data-opportunity="${esc(number(scores.opportunity, "0"))}">
+    <button class="problem-toggle" type="button" aria-expanded="false" aria-controls="${esc(detailsId)}">
+      <span class="problem-head"><span><span class="problem-kicker">${esc(statusLabel(problem.domain))} · ${esc(problemId)}</span><span class="problem-title" role="heading" aria-level="3">${esc(problem.title || "Untitled problem")}</span><span class="problem-summary-preview">${esc(excerpt(problem.summary, 180))}</span></span><span class="problem-status-row"><span class="status-badge status-${esc(statusClass(problem.status))}">${esc(statusLabel(problem.status))}</span><span class="score-badge">Need ${esc(number(scores.need))}</span><span class="project-chevron" aria-hidden="true"></span></span></span>
+    </button>
+    <div class="problem-details" id="${esc(detailsId)}" hidden>
+      <p class="problem-summary">${esc(problem.summary || "No summary recorded.")}</p>
+      <div class="problem-score-grid">${scoreFields.map(([label, value]) => `<div class="problem-score"><b>${esc(typeof value === "number" ? number(value) : (value || "—"))}</b><span>${esc(label)}</span></div>`).join("")}</div>
+      <div class="problem-detail-grid">
+        <section class="mini-panel"><h4>Evidence</h4><dl class="compact-dl">${field("Domain", text(problem.domain))}${field("Status", text(statusLabel(problem.status)))}${field("First seen", text(formatDate(problem.firstSeen)))}${field("Last signal", text(formatDate(lastSignal)))}${field("Evidence dates", evidenceDates.length ? esc(evidenceDates.map(formatDate).join(" · ")) : text(null))}</dl></section>
+        <section class="mini-panel"><h4>Linked projects</h4><div class="linked-projects">${projectMarkup}</div></section>
+      </div>
+      <section class="problem-observations"><div class="subhead"><h4>Recent observation paraphrases</h4><span class="muted">${esc(matchingObservations.length)} matched</span></div>${observationMarkup}</section>
+      ${problem.notes ? `<p class="problem-notes">${esc(problem.notes)}</p>` : ""}
     </div>
   </article>`;
 }
@@ -270,19 +358,22 @@ function renderScan(entry, latest = false, projectByTitle = null) {
   </article>`;
 }
 
-function buildHtml({ entries, projects, carts }) {
-  const latest = entries[0] || null;
-  const projectById = new Map(projects.map((project) => [project.id, project]));
+function renderLegacyLogs(entries, projectByTitle) {
+  if (!entries.length) return "";
+  return `<details class="legacy-logs"><summary><span>Legacy daily logs</span><span class="muted">${esc(entries.length)} archived scan${entries.length === 1 ? "" : "s"}</span></summary><div class="legacy-log-list">${entries.map((entry) => renderScan(entry, false, projectByTitle)).join("")}</div></details>`;
+}
+
+function buildHtml({ entries, problems, observations, runs, projects, carts }) {
+  const latestRun = runs[0] || null;
   const projectByTitle = new Map(projects.map((project) => [key(project.title), project]));
+  const problemById = new Map(problems.map((problem) => [problem.id, problem]));
   const cartById = new Map(carts.map((cart) => [cart.id, cart]));
-  const groupUrl = safeUrl(latest && latest.group) || "https://www.facebook.com/groups/397162319426193";
-  const groupName = latest && latest.groupName ? latest.groupName : "Technology and aids for dementia";
   const projectStatuses = [...new Set(projects.map((project) => String(project.status || "unknown").toLowerCase()))].sort();
-  const totalIdeas = entries.reduce((total, entry) => total + (Array.isArray(entry.ideas) ? entry.ideas.length : 0), 0);
-  const strongIdeas = entries.reduce((total, entry) => total + (Array.isArray(entry.ideas) ? entry.ideas.filter((idea) => Number(idea.score) >= 7).length : 0), 0);
-  const cartTotal = carts.reduce((total, cart) => total + (Number(cart.grandTotalUsd) || 0), 0);
+  const activeProblems = problems.filter((problem) => String(problem.status || "").toLowerCase() === "active").length;
+  const rankedProblems = problems.slice().sort((a, b) => Number(b.scores && b.scores.need || 0) - Number(a.scores && a.scores.need || 0));
+  const latestRunDate = latestRun && (latestRun.completedAt || latestRun.startedAt || latestRun.date);
+  const accessLabel = latestRun ? (latestRun.accessOk ? "Access OK" : "Access unavailable") : "Access unknown";
   const generatedAt = new Date().toLocaleString("en-US", { timeZone: "America/Chicago", dateStyle: "medium", timeStyle: "short" });
-  const statusStats = projectStatuses.length ? projectStatuses.map((status) => `<span><b>${projects.filter((project) => String(project.status || "unknown").toLowerCase() === status).length}</b><small>${esc(statusLabel(status))}</small></span>`).join("") : `<span><b>0</b><small>No projects</small></span>`;
   const projectPreview = projects.length
     ? `${projects[0].title}${projects.length > 1 ? ` + ${projects.length - 1} more` : ""}`
     : "No projects saved yet";
@@ -297,11 +388,11 @@ function buildHtml({ entries, projects, carts }) {
   </div></header>
   <main class="shell">
     <section class="portal-list" aria-label="Explore the lab">
-      <details id="research" class="portal-card"><summary><span><strong>Research</strong><small>${latest ? `Latest scan: ${esc(formatDate(latest.date))}` : "No scan yet"} · ${esc(strongIdeas)} ideas</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content">${latest ? renderScan(latest, true, projectByTitle) : emptyState("No daily scan yet", "Append a JSON object to ./log.jsonl, then rebuild the dashboard.")}${entries.length > 1 ? `<div class="archive-list">${entries.slice(1).map((entry) => renderScan(entry, false, projectByTitle)).join("")}</div>` : ""}</div></details>
-      <details id="projects" class="portal-card"><summary><span><strong>Projects</strong><small>${esc(projects.length)} projects · ${esc(projectPreview)}</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="toolbar"><div class="filter-group" role="group" aria-label="Filter projects by status"><button class="filter-button active" type="button" data-status-filter="all">All <span>${esc(projects.length)}</span></button>${projectStatuses.map((status) => `<button class="filter-button" type="button" data-status-filter="${esc(status)}">${esc(statusLabel(status))} <span>${projects.filter((project) => String(project.status || "unknown").toLowerCase() === status).length}</span></button>`).join("")}</div><label class="sort-control" for="project-sort">Sort <select id="project-sort"><option value="priority">Priority first</option><option value="score">Score first</option><option value="title">Title A–Z</option></select></label></div><div class="project-grid-list" data-project-list>${projects.length ? projects.map((project, index) => renderProject(project, cartById, index)).join("") : emptyState("No projects loaded", "Add project JSON files to ./projects and rebuild the dashboard.")}</div><p class="filter-empty" data-filter-empty hidden>No projects match this filter.</p></div></details>
+      <details id="research" class="portal-card"><summary><span><strong>Research</strong><small>${esc(activeProblems)} active problems · Last research run: ${esc(formatDate(latestRunDate))} · ${esc(accessLabel)}</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="research-context"><p class="eyebrow">Problem-centric evidence</p><p>Durable caregiver problems ranked by need and opportunity. Runs and observation dates are supporting evidence, not the organizing unit.</p></div>${latestRun ? `<aside class="research-run-note"><b>Latest research run</b><span>${esc(formatDate(latestRunDate, true))} · ${esc(accessLabel)} · ${esc(number(latestRun.newObservations, "0"))} new observations</span>${latestRun.notes ? `<p>${esc(latestRun.notes)}</p>` : ""}</aside>` : ""}<div class="toolbar problem-toolbar"><span class="toolbar-label">Rank problems by</span><label class="sort-control" for="problem-sort"><span class="sr-only">Rank problems by</span><select id="problem-sort"><option value="need">Need</option><option value="opportunity">Opportunity</option></select></label></div><div class="problem-list" data-problem-list>${rankedProblems.length ? rankedProblems.map((problem, index) => renderProblem(problem, observations, projects, index)).join("") : emptyState("No problems loaded", "Add problem JSON files to ./research/problems and rebuild the dashboard.")}</div>${renderLegacyLogs(entries, projectByTitle)}</div></details>
+      <details id="projects" class="portal-card"><summary><span><strong>Projects</strong><small>${esc(projects.length)} projects · ${esc(projectPreview)}</small></span><span class="portal-arrow" aria-hidden="true"></span></summary><div class="portal-content"><div class="toolbar"><div class="filter-group" role="group" aria-label="Filter projects by status"><button class="filter-button active" type="button" data-status-filter="all">All <span>${esc(projects.length)}</span></button>${projectStatuses.map((status) => `<button class="filter-button" type="button" data-status-filter="${esc(status)}">${esc(statusLabel(status))} <span>${projects.filter((project) => String(project.status || "unknown").toLowerCase() === status).length}</span></button>`).join("")}</div><label class="sort-control" for="project-sort">Sort <select id="project-sort"><option value="priority">Priority first</option><option value="score">Score first</option><option value="title">Title A–Z</option></select></label></div><div class="project-grid-list" data-project-list>${projects.length ? projects.map((project, index) => renderProject(project, cartById, index, problemById)).join("") : emptyState("No projects loaded", "Add project JSON files to ./projects and rebuild the dashboard.")}</div><p class="filter-empty" data-filter-empty hidden>No projects match this filter.</p></div></details>
     </section>
   </main>
-  <footer class="shell footer"><p><b>d-Tech</b></p><p>Updated ${esc(formatDate(latest && latest.date))}</p></footer>
+  <footer class="shell footer"><p><b>d-Tech</b> · Problem-centric research</p><p>Updated ${esc(generatedAt)} · Rebuild with <code>node dtech/build.js</code></p></footer>
   <script src="assets/app.js"></script>
 </body></html>`;
 }
@@ -352,6 +443,11 @@ main { padding: 58px 0 90px; }.section-heading, .archive-heading { display:flex;
 @media (max-width:640px) { .hero { padding-top:13px; }.top-links { display:flex; gap:15px; font-size:12px; }.brand small { font-size:9px; }.hero h1 { font-size:39px; }.hero-copy { font-size:14px; }.now-card { padding:18px; }.now-card h2 { font-size:26px; }.now-card-foot { margin-top:14px; }.portal-card summary { padding:16px 18px; }.portal-card strong { font-size:18px; }.portal-content { padding:0 12px 12px; }.portal-content .toolbar { margin-top:12px; } }
 .project-costs { margin-top:18px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:rgba(11,23,27,.2); }.project-costs > summary { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:13px 14px; cursor:pointer; color:var(--teal-soft); font-weight:800; font-size:13px; list-style:none; }.project-costs > summary::-webkit-details-marker { display:none; }.project-costs > summary span { color:var(--amber-soft); }.project-costs > summary::after { content:""; width:8px; height:8px; margin-left:3px; border-right:2px solid var(--teal); border-bottom:2px solid var(--teal); transform:rotate(45deg) translateY(-2px); transition:transform .18s ease; }.project-costs[open] > summary::after { transform:rotate(225deg) translate(-1px,-1px); }.project-costs .cart-card { border:0; border-top:1px solid var(--line); border-radius:0; box-shadow:none; }.project-costs .cart-head { background:rgba(255,255,255,.02); }
 .idea-head h3 a { color:var(--ink); text-decoration:none; }.idea-head h3 a:hover, .idea-head h3 a:focus-visible { color:var(--teal-soft); text-decoration:underline; }.idea-head h3 a span { color:var(--teal); }
+/* Problem-centric research portal */
+.research-context { padding:16px 0 4px; }.research-context p:last-child { max-width:760px; margin:0; color:#d5e2dd; }.research-run-note { display:grid; gap:3px; margin:14px 0 16px; padding:13px 15px; border-left:3px solid var(--teal); border-radius:0 10px 10px 0; background:rgba(85,214,178,.07); color:var(--muted); font-size:12px; }.research-run-note b { color:var(--teal-soft); }.research-run-note p { margin:4px 0 0; }.problem-toolbar { justify-content:flex-end; margin-bottom:12px; }.toolbar-label { margin-right:auto; color:var(--muted); font-size:12px; }.problem-list { display:grid; gap:10px; }.problem-card { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:rgba(21,49,57,.62); }.problem-toggle { display:block; width:100%; padding:16px 18px; border:0; color:inherit; background:transparent; text-align:left; cursor:pointer; }.problem-toggle:hover { background:rgba(255,255,255,.025); }.problem-toggle:focus-visible { outline:2px solid var(--teal); outline-offset:-3px; }.problem-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; }.problem-kicker { display:block; margin-bottom:5px; color:var(--muted); font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }.problem-title { display:block; font-size:19px; font-weight:750; letter-spacing:-.025em; }.problem-summary-preview { display:block; max-width:760px; margin-top:5px; color:var(--muted); font-size:12px; }.problem-status-row { display:flex; align-items:center; gap:9px; flex-shrink:0; }.problem-status-row .score-badge { color:var(--amber-soft); border-color:rgba(244,185,79,.3); }.status-active { color:var(--teal-soft); border-color:rgba(85,214,178,.3); background:rgba(85,214,178,.1); }.status-watching { color:var(--amber-soft); }.status-parked { color:var(--muted); }.problem-details { padding:17px 18px 18px; border-top:1px solid var(--line); }.problem-summary { max-width:860px; margin:0; color:#dbe8e3; font-size:14px; }.problem-score-grid { display:grid; grid-template-columns:repeat(6, 1fr); gap:8px; margin:16px 0; }.problem-score { min-width:0; padding:10px 9px; border:1px solid var(--line); border-radius:10px; background:rgba(11,23,27,.28); }.problem-score b { display:block; color:var(--teal-soft); font-size:18px; line-height:1.15; }.problem-score span { display:block; margin-top:4px; color:var(--muted); font-size:9px; line-height:1.2; text-transform:uppercase; letter-spacing:.07em; }.problem-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }.problem-detail-grid .mini-panel { height:100%; }.linked-projects { display:grid; gap:6px; font-size:13px; }.linked-projects a { color:var(--amber-soft); font-weight:700; }.problem-observations { margin-top:10px; padding:14px; border:1px solid var(--line); border-radius:12px; background:rgba(11,23,27,.22); }.problem-observations h4 { margin:0; color:var(--teal-soft); font-size:11px; text-transform:uppercase; letter-spacing:.1em; }.observation-list { display:grid; gap:10px; margin:10px 0 0; padding:0; list-style:none; }.observation-list li { display:grid; grid-template-columns:90px 1fr; gap:12px; padding-top:10px; border-top:1px solid rgba(196,226,218,.08); color:#cbdad5; font-size:13px; }.observation-list li:first-child { padding-top:0; border-top:0; }.observation-date { color:var(--amber-soft); font-size:11px; font-weight:800; }.problem-notes { margin:12px 0 0; color:var(--muted); font-size:12px; }.legacy-logs { margin-top:16px; border-top:1px solid var(--line); }.legacy-logs > summary { display:flex; justify-content:space-between; gap:12px; padding:14px 2px 2px; color:var(--muted); cursor:pointer; font-size:12px; font-weight:800; list-style:none; }.legacy-logs > summary::-webkit-details-marker { display:none; }.legacy-logs > summary span:first-child { color:var(--teal-soft); }.legacy-log-list { display:grid; gap:10px; margin-top:12px; }.legacy-log-list .scan-card { display:block; margin:0; box-shadow:none; }.legacy-log-list .scan-body { display:grid; }.legacy-log-list .archive-scan .scan-head { padding:14px 16px; }.legacy-log-list .archive-scan .scan-body { display:none; }
+@media (max-width:900px) { .problem-score-grid { grid-template-columns:repeat(3, 1fr); } }
+.legacy-log-list .archive-scan .scan-body { display:grid; }
+@media (max-width:640px) { .problem-head { flex-direction:column; gap:11px; }.problem-status-row { justify-content:space-between; width:100%; }.problem-title { font-size:18px; }.problem-score-grid { grid-template-columns:repeat(2, 1fr); }.problem-detail-grid { grid-template-columns:1fr; }.observation-list li { grid-template-columns:1fr; gap:2px; }.problem-toolbar { justify-content:space-between; }.toolbar-label { margin-right:0; } }
 `;
 
 const JS = `document.addEventListener("DOMContentLoaded", function () {
@@ -360,6 +456,9 @@ const JS = `document.addEventListener("DOMContentLoaded", function () {
   var empty = document.querySelector("[data-filter-empty]");
   var filterButtons = document.querySelectorAll("[data-status-filter]");
   var sort = document.getElementById("project-sort");
+  var problemCards = Array.prototype.slice.call(document.querySelectorAll("[data-problem-card]"));
+  var problemList = document.querySelector("[data-problem-list]");
+  var problemSort = document.getElementById("problem-sort");
   var activeStatus = "all";
 
   function refresh() {
@@ -378,6 +477,15 @@ const JS = `document.addEventListener("DOMContentLoaded", function () {
     if (empty) empty.hidden = visible.length !== 0;
   }
 
+  function refreshProblems() {
+    if (!problemList) return;
+    var mode = problemSort ? problemSort.value : "need";
+    problemCards.sort(function (a, b) {
+      return Number(b.getAttribute("data-" + mode) || 0) - Number(a.getAttribute("data-" + mode) || 0);
+    });
+    problemCards.forEach(function (card) { problemList.appendChild(card); });
+  }
+
   filterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
       activeStatus = button.getAttribute("data-status-filter") || "all";
@@ -386,6 +494,14 @@ const JS = `document.addEventListener("DOMContentLoaded", function () {
     });
   });
   document.querySelectorAll(".project-toggle").forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      var expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      var details = document.getElementById(toggle.getAttribute("aria-controls"));
+      if (details) details.hidden = expanded;
+    });
+  });
+  document.querySelectorAll(".problem-toggle").forEach(function (toggle) {
     toggle.addEventListener("click", function () {
       var expanded = toggle.getAttribute("aria-expanded") === "true";
       toggle.setAttribute("aria-expanded", String(!expanded));
@@ -420,15 +536,32 @@ const JS = `document.addEventListener("DOMContentLoaded", function () {
       details.hidden = false;
     }
   }
+  function openProblem(id) {
+    var research = document.getElementById("research");
+    var card = document.getElementById("problem-" + id);
+    if (research && research.tagName === "DETAILS") research.open = true;
+    if (!card) return;
+    var toggle = card.querySelector(".problem-toggle");
+    var details = toggle && document.getElementById(toggle.getAttribute("aria-controls"));
+    if (toggle && details && toggle.getAttribute("aria-expanded") !== "true") {
+      toggle.setAttribute("aria-expanded", "true");
+      details.hidden = false;
+    }
+  }
   document.querySelectorAll("[data-open-project]").forEach(function (control) {
     control.addEventListener("click", function () { openProject(control.getAttribute("data-open-project")); });
+  });
+  document.querySelectorAll("[data-open-problem]").forEach(function (control) {
+    control.addEventListener("click", function () { openProblem(control.getAttribute("data-open-problem")); });
   });
   if (window.location.hash) {
     var linkedSection = document.querySelector(window.location.hash);
     if (linkedSection && linkedSection.tagName === "DETAILS") linkedSection.open = true;
     if (window.location.hash.indexOf("#project-") === 0) openProject(window.location.hash.slice(9));
+    if (window.location.hash.indexOf("#problem-") === 0) openProblem(window.location.hash.slice(9));
   }
   if (sort) sort.addEventListener("change", refresh);
+  if (problemSort) problemSort.addEventListener("change", refreshProblems);
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener("click", function (event) {
       var target = document.querySelector(anchor.getAttribute("href"));
@@ -437,6 +570,7 @@ const JS = `document.addEventListener("DOMContentLoaded", function () {
     });
   });
   refresh();
+  refreshProblems();
 });
 `;
 
@@ -448,12 +582,15 @@ function writeAssets() {
 
 function main() {
   const entries = readLog(LOG_PATH);
+  const problems = readJsonDirectory(PROBLEMS_DIR);
+  const observations = readJsonlDirectory(OBSERVATIONS_DIR);
+  const runs = readJsonDirectory(RUNS_DIR).sort((a, b) => String(b.completedAt || b.startedAt || b.date || "").localeCompare(String(a.completedAt || a.startedAt || a.date || "")));
   const projects = readJsonDirectory(PROJECTS_DIR).sort((a, b) => (Number(a.priority) || 99) - (Number(b.priority) || 99));
   const carts = readJsonDirectory(CARTS_DIR).sort((a, b) => String(a.title || a.id || "").localeCompare(String(b.title || b.id || "")));
   writeAssets();
-  fs.writeFileSync(OUT_HTML, buildHtml({ entries, projects, carts }));
+  fs.writeFileSync(OUT_HTML, buildHtml({ entries, problems, observations, runs, projects, carts }));
   console.log(`Built ${OUT_HTML}`);
-  console.log(`Scans: ${entries.length} · Projects: ${projects.length} · Carts: ${carts.length}`);
+  console.log(`Problems: ${problems.length} · Observations: ${observations.length} · Runs: ${runs.length} · Legacy scans: ${entries.length} · Projects: ${projects.length} · Carts: ${carts.length}`);
 }
 
 main();

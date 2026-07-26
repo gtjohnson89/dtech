@@ -1,0 +1,54 @@
+{
+  "id": "fb-tech-aids-backfill-14d-2026-07-26",
+  "kind": "backfill",
+  "windowDays": 14,
+  "startedAt": "2026-07-26T09:40:00-05:00",
+  "completedAt": "2026-07-26T10:00:00-05:00",
+  "source": "Technology and aids for dementia",
+  "group": "https://www.facebook.com/groups/397162319426193",
+  "accessOk": true,
+  "method": "openclaw-browser-scroll-expand",
+  "fetchedPostsApprox": 12,
+  "newObservations": 12,
+  "duplicatesSkipped": 0,
+  "problemsTouched": [
+    "tv-remote-and-menu-confusion",
+    "answering-family-calls",
+    "scam-and-content-unsafe-phone",
+    "one-button-church-radio",
+    "smart-home-setup-friction",
+    "simple-physical-texting",
+    "wandering-exit-alerts",
+    "tv-audio-for-hearing-loss",
+    "bathroom-splash-and-raised-seat",
+    "device-setup-timeouts"
+  ],
+  "topProblems": [
+    {
+      "id": "tv-remote-and-menu-confusion",
+      "need": 100,
+      "title": "TV is too complex; need power/volume/one-channel only"
+    },
+    {
+      "id": "simple-physical-texting",
+      "need": 89.1,
+      "title": "Need simple physical-keyboard texting without smartphone complexity"
+    },
+    {
+      "id": "wandering-exit-alerts",
+      "need": 83.0,
+      "title": "Exit/wandering detection when doors are used unexpectedly"
+    },
+    {
+      "id": "answering-family-calls",
+      "need": 78.3,
+      "title": "Cannot reliably answer family calls"
+    },
+    {
+      "id": "scam-and-content-unsafe-phone",
+      "need": 78.3,
+      "title": "Phones expose scams, junk, and unsafe content"
+    }
+  ],
+  "notes": "Initial live backfill. Organizing unit shifted from days to durable caregiver problems. Days retained only as observation timestamps/run metadata."
+}

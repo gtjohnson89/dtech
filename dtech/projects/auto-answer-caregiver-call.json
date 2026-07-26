@@ -8,7 +8,14 @@
   "source": {
     "group": "https://www.facebook.com/groups/397162319426193",
     "firstSeen": "2026-07-26",
-    "themes": ["cannot swipe to answer", "speakerphone volume", "family reach-out reliability"]
+    "themes": [
+      "cannot swipe to answer",
+      "speakerphone volume",
+      "family reach-out reliability"
+    ],
+    "problemIds": [
+      "answering-family-calls"
+    ]
   },
   "problem": "The person living with dementia often cannot answer a smartphone call (swipe UI, volume, which app). Family members need a reliable way to open a loud speakerphone path from allowlisted contacts.",
   "solution": "Dedicated Android mode or cheap spare-phone image: auto-answer allowlisted contacts, force speaker, giant hangup affordance, no app clutter. Could ship as setup guide + MDM/kiosk profile, or a dedicated app.",
@@ -24,9 +31,18 @@
   },
   "market": {
     "needSignal": "high",
-    "competition": ["RAZ Memory Cell Phone", "Doro/Jitterbug style phones", "generic senior launchers", "Fully Kiosk / MDM kiosk tools"],
+    "competition": [
+      "RAZ Memory Cell Phone",
+      "Doro/Jitterbug style phones",
+      "generic senior launchers",
+      "Fully Kiosk / MDM kiosk tools"
+    ],
     "willingnessToPay": "Families pay hundreds for specialized senior phones. A $29-$79 app or $149 configured phone kit could work.",
-    "distribution": ["direct-to-caregiver", "amazon-app-adjacent-guide", "facebook-group"],
+    "distribution": [
+      "direct-to-caregiver",
+      "amazon-app-adjacent-guide",
+      "facebook-group"
+    ],
     "profitHypothesis": "Software margin is excellent if OEM permission hurdles are solved. Hardware-kit margin is thinner but easier to explain."
   },
   "costs": {
@@ -41,13 +57,39 @@
   "bomCartId": "auto-answer-caregiver-call",
   "softwarePlan": {
     "summary": "Android app + setup profile: contact allowlist, auto-answer, max speakerphone, kiosk launcher, remote config by caregiver.",
-    "stack": ["Kotlin/Android", "optional web caregiver portal", "MDM/kiosk fallback"],
-    "modules": ["Allowlist contacts", "Auto-answer service", "Speaker enforcement", "Kiosk launcher", "Caregiver remote settings"],
-    "mvpScope": ["One device profile", "Allowlist only", "Auto-answer + speaker", "Giant end-call button"],
-    "nonGoals": ["iOS version first", "Video care platform", "Fall detection medical claims"],
-    "risks": ["OEM call API differences", "Play policy", "False auto-answer from robocallers if allowlist fails"]
+    "stack": [
+      "Kotlin/Android",
+      "optional web caregiver portal",
+      "MDM/kiosk fallback"
+    ],
+    "modules": [
+      "Allowlist contacts",
+      "Auto-answer service",
+      "Speaker enforcement",
+      "Kiosk launcher",
+      "Caregiver remote settings"
+    ],
+    "mvpScope": [
+      "One device profile",
+      "Allowlist only",
+      "Auto-answer + speaker",
+      "Giant end-call button"
+    ],
+    "nonGoals": [
+      "iOS version first",
+      "Video care platform",
+      "Fall detection medical claims"
+    ],
+    "risks": [
+      "OEM call API differences",
+      "Play policy",
+      "False auto-answer from robocallers if allowlist fails"
+    ]
   },
-  "solved": ["Problem validated from group scan", "Competitor category identified"],
+  "solved": [
+    "Problem validated from group scan",
+    "Competitor category identified"
+  ],
   "unsolved": [
     "Which Android OEM/API path is most reliable in 2026",
     "App-only vs configured-phone kit business model",
@@ -61,7 +103,10 @@
   "artifacts": {
     "spikeDir": null,
     "docs": [],
-    "links": ["https://www.razmobility.com/solutions/memory-cellphone/", "https://www.fully-kiosk.com/"]
+    "links": [
+      "https://www.razmobility.com/solutions/memory-cellphone/",
+      "https://www.fully-kiosk.com/"
+    ]
   },
   "scores": {
     "impact": 9,

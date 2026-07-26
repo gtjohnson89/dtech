@@ -1,0 +1,34 @@
+{
+  "id": "device-setup-timeouts",
+  "title": "Phone/tablet setup screens time out before LO can finish",
+  "status": "watching",
+  "domain": "setup-support",
+  "summary": "Initial iPhone/accessibility setup fails because auto-lock/blackout happens before the person can read and complete first steps.",
+  "firstSeen": "2026-07-23",
+  "lastNewSignalAt": "2026-07-23",
+  "aliases": [
+    "auto lock never",
+    "setup screen blacks out",
+    "accessibility setup friction"
+  ],
+  "evidenceDates": [
+    "2026-07-23"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 2.0,
+    "engagementProxy": 8,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 55.2,
+    "opportunity": 60.4,
+    "buildability": 2,
+    "strategicFit": 2,
+    "severity": 2.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Seeded from 14-day Facebook group backfill + existing project map."
+}

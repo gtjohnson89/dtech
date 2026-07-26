@@ -1,0 +1,34 @@
+{
+  "id": "wandering-exit-alerts",
+  "title": "Exit/wandering detection when doors are used unexpectedly",
+  "status": "watching",
+  "domain": "safety",
+  "summary": "Loved ones leave home unexpectedly or with confused destination intent. Caregivers need reliable door/exit awareness without over-restricting daily life.",
+  "firstSeen": "2026-07-19",
+  "lastNewSignalAt": "2026-07-19",
+  "aliases": [
+    "door sensors",
+    "left the house",
+    "going home wandering"
+  ],
+  "evidenceDates": [
+    "2026-07-19"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 5.0,
+    "engagementProxy": 28,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 83.0,
+    "opportunity": 90.7,
+    "buildability": 3,
+    "strategicFit": 3,
+    "severity": 5.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Seeded from 14-day Facebook group backfill + existing project map."
+}

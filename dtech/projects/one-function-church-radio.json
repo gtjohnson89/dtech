@@ -8,7 +8,14 @@
   "source": {
     "group": "https://www.facebook.com/groups/397162319426193",
     "firstSeen": "2026-07-26",
-    "themes": ["church service listening", "one-button simplicity", "multi-function radios too hard"]
+    "themes": [
+      "church service listening",
+      "one-button simplicity",
+      "multi-function radios too hard"
+    ],
+    "problemIds": [
+      "one-button-church-radio"
+    ]
   },
   "problem": "Multi-function radios/CD players overwhelm users. Some families only need one trusted audio source (church service, AM station, hymn stream) with a single giant button.",
   "solution": "3D-printed one-button audio box around ESP32 + amp/speaker or a pre-tuned simple radio module. Caregiver presets the only station/stream.",
@@ -24,9 +31,17 @@
   },
   "market": {
     "needSignal": "medium",
-    "competition": ["simple senior radios", "Alexa routines", "church app on tablet"],
+    "competition": [
+      "simple senior radios",
+      "Alexa routines",
+      "church app on tablet"
+    ],
     "willingnessToPay": "Likely $39-$79 for a dedicated box.",
-    "distribution": ["etsy", "church networks", "direct"],
+    "distribution": [
+      "etsy",
+      "church networks",
+      "direct"
+    ],
     "profitHypothesis": "Low BOM, charming product, but smaller TAM than TV/phone."
   },
   "costs": {
@@ -41,14 +56,41 @@
   "bomCartId": "one-function-church-radio",
   "softwarePlan": {
     "summary": "ESP32 firmware boots to one preset stream, single button = play/stop, optional rotary volume hidden under caregiver lid.",
-    "stack": ["ESP-IDF or Arduino", "MAX98357A I2S", "3D printed enclosure"],
-    "modules": ["WiFi provisioning", "Preset URL storage", "Button state machine", "Watchdog auto-reconnect"],
-    "mvpScope": ["One stream", "One button", "Power LED", "Caregiver hidden reset"],
-    "nonGoals": ["Multi-station UI", "Touchscreen", "Voice assistant"],
-    "risks": ["WiFi dependence", "Stream URL changes", "Audio quality / speaker selection"]
+    "stack": [
+      "ESP-IDF or Arduino",
+      "MAX98357A I2S",
+      "3D printed enclosure"
+    ],
+    "modules": [
+      "WiFi provisioning",
+      "Preset URL storage",
+      "Button state machine",
+      "Watchdog auto-reconnect"
+    ],
+    "mvpScope": [
+      "One stream",
+      "One button",
+      "Power LED",
+      "Caregiver hidden reset"
+    ],
+    "nonGoals": [
+      "Multi-station UI",
+      "Touchscreen",
+      "Voice assistant"
+    ],
+    "risks": [
+      "WiFi dependence",
+      "Stream URL changes",
+      "Audio quality / speaker selection"
+    ]
   },
-  "solved": ["Attractive low-cost BOM path identified via Amazon browser pricing"],
-  "unsolved": ["AM vs stream decision", "Enclosure ergonomics for arthritic hands"],
+  "solved": [
+    "Attractive low-cost BOM path identified via Amazon browser pricing"
+  ],
+  "unsolved": [
+    "AM vs stream decision",
+    "Enclosure ergonomics for arthritic hands"
+  ],
   "nextActions": [
     "Order-of-magnitude enclosure sketch",
     "Pick one local church stream style example for demo",
@@ -57,8 +99,16 @@
   "artifacts": {
     "spikeDir": null,
     "docs": [],
-    "links": ["https://www.amazon.com/s?k=esp32+dev+board+max98357a"]
+    "links": [
+      "https://www.amazon.com/s?k=esp32+dev+board+max98357a"
+    ]
   },
-  "scores": {"impact": 6, "feasibility": 8, "profit": 6, "fit": 9, "total": 7},
+  "scores": {
+    "impact": 6,
+    "feasibility": 8,
+    "profit": 6,
+    "fit": 9,
+    "total": 7
+  },
   "notes": "Great quick hardware win / portfolio piece; probably not the biggest business."
 }

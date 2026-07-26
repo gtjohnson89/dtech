@@ -9,7 +9,14 @@
   "source": {
     "group": "https://www.facebook.com/groups/397162319426193",
     "firstSeen": "2026-07-26",
-    "themes": ["TV too complex", "remote failure", "smart menus break usability"]
+    "themes": [
+      "TV too complex",
+      "remote failure",
+      "smart menus break usability"
+    ],
+    "problemIds": [
+      "tv-remote-and-menu-confusion"
+    ]
   },
   "problem": "People living with dementia (and exhausted caregivers) cannot operate modern smart TVs. Too many inputs, apps, PVR menus, and fragile remotes. They need power/volume/one favorite channel or one streaming destination with almost zero choices.",
   "solution": "A caregiver-configured TV companion: either (A) software+hub that locks a Fire TV / Android TV into a single destination with a 3-button physical remote enclosure, or (B) a simpler IR-only big-button path for non-streaming homes. Start with software config + 3D-printed remote shell; avoid medical claims.",
@@ -32,7 +39,12 @@
       "GE BigEZ / generic big-button remotes"
     ],
     "willingnessToPay": "Caregivers already pay $17-$40 for dumb big-button remotes and ~$200 for care systems. A $79-$149 configured kit is plausible.",
-    "distribution": ["amazon", "direct-to-caregiver", "etsy", "facebook-group-soft-launch"],
+    "distribution": [
+      "amazon",
+      "direct-to-caregiver",
+      "etsy",
+      "facebook-group-soft-launch"
+    ],
     "profitHypothesis": "Prototype BOM under ~$180 if using Fire TV Cube path; productized IR-only kit BOM can land under ~$35 with printed shell. Software differentiation + setup service is the margin story, not commodity remote plastic."
   },
   "costs": {
@@ -47,7 +59,12 @@
   "bomCartId": "big-button-tv-companion",
   "softwarePlan": {
     "summary": "Caregiver web/app configures allowed destinations, volume ceiling, and power behavior. Device agent on Fire TV / Android TV enforces kiosk-like mode. Optional ESP/IR blaster path for dumb TVs.",
-    "stack": ["TypeScript", "local device agent", "optional React caregiver UI", "3D-printed remote shell CAD"],
+    "stack": [
+      "TypeScript",
+      "local device agent",
+      "optional React caregiver UI",
+      "3D-printed remote shell CAD"
+    ],
     "modules": [
       "Caregiver setup wizard",
       "Allowed-destination allowlist",

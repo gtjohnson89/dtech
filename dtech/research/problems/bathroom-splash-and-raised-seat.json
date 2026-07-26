@@ -1,0 +1,33 @@
+{
+  "id": "bathroom-splash-and-raised-seat",
+  "title": "Raised toilet seat still allows urine splash/misses",
+  "status": "parked",
+  "domain": "adl-hardware",
+  "summary": "Raised seats and handles help transfers, but urine still reaches floor/seat gaps. Hygiene and materials constraints make this a weaker software/tinkerer fit.",
+  "firstSeen": "2026-07-26",
+  "lastNewSignalAt": "2026-07-26",
+  "aliases": [
+    "toilet splash guard",
+    "raised toilet seat urine"
+  ],
+  "evidenceDates": [
+    "2026-07-25"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 3.0,
+    "engagementProxy": 15,
+    "linkedProjectIds": []
+  },
+  "scores": {
+    "need": 67.2,
+    "opportunity": 60.0,
+    "buildability": 2,
+    "strategicFit": 1,
+    "severity": 3.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Seeded from 14-day Facebook group backfill + existing project map."
+}

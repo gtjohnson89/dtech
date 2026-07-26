@@ -1,0 +1,40 @@
+{
+  "id": "tv-remote-and-menu-confusion",
+  "title": "TV is too complex; need power/volume/one-channel only",
+  "status": "active",
+  "domain": "entertainment",
+  "summary": "Caregivers need a TV experience reduced to power, volume, and one or a few channels. Smart menus, PVRs, streaming UIs, and multi-button remotes repeatedly break independent use.",
+  "firstSeen": "2026-07-12",
+  "lastNewSignalAt": "2026-07-26",
+  "aliases": [
+    "simple tv",
+    "big button remote",
+    "no smart menus",
+    "pvr too hard",
+    "jubilee tv",
+    "flipper remote",
+    "broadlink"
+  ],
+  "evidenceDates": [
+    "2026-07-25"
+  ],
+  "rollup": {
+    "uniqueSignals": 3,
+    "totalSignals": 3,
+    "averageSeverity": 4.67,
+    "engagementProxy": 28,
+    "linkedProjectIds": [
+      "big-button-tv-companion"
+    ]
+  },
+  "scores": {
+    "need": 100,
+    "opportunity": 100,
+    "buildability": 4,
+    "strategicFit": 5,
+    "severity": 4.67,
+    "confidence": "moderate",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Seeded from 14-day Facebook group backfill + existing project map."
+}

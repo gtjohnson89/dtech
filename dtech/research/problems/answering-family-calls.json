@@ -1,0 +1,36 @@
+{
+  "id": "answering-family-calls",
+  "title": "Cannot reliably answer family calls",
+  "status": "active",
+  "domain": "communication",
+  "summary": "People with dementia often cannot swipe/answer phones or manage speaker volume. Families need dependable reach-out, ideally auto-answer for allowlisted contacts at loud speakerphone.",
+  "firstSeen": "2026-07-24",
+  "lastNewSignalAt": "2026-07-25",
+  "aliases": [
+    "auto-answer",
+    "speakerphone call",
+    "call LO without them answering"
+  ],
+  "evidenceDates": [
+    "2026-07-25"
+  ],
+  "rollup": {
+    "uniqueSignals": 1,
+    "totalSignals": 1,
+    "averageSeverity": 5.0,
+    "engagementProxy": 1,
+    "linkedProjectIds": [
+      "auto-answer-caregiver-call"
+    ]
+  },
+  "scores": {
+    "need": 78.3,
+    "opportunity": 100,
+    "buildability": 4,
+    "strategicFit": 5,
+    "severity": 5.0,
+    "confidence": "thin",
+    "calculatedAt": "2026-07-26"
+  },
+  "notes": "Seeded from 14-day Facebook group backfill + existing project map."
+}
