@@ -293,7 +293,7 @@ function buildHtml({ entries, projects, carts }) {
 <body>
   <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
   <header class="hero" id="top"><div class="shell">
-    <nav class="topbar" aria-label="Dashboard navigation"><a class="brand" href="#top"><span class="brand-mark">D</span><span><b>d-Tech</b></span></a><div class="top-links"><a href="#research" data-open-section="research">Research</a><a href="#projects" data-open-section="projects">Projects</a></div></nav>
+    <nav class="topbar" aria-label="Dashboard navigation"><a class="brand" href="#top"><span class="brand-mark">D</span><span><b>d-Tech</b></span></a><div class="top-links"><a href="/">The George Org</a><a href="#research" data-open-section="research">Research</a><a href="#projects" data-open-section="projects">Projects</a></div></nav>
   </div></header>
   <main class="shell">
     <section class="portal-list" aria-label="Explore the lab">
