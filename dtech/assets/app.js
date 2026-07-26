@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     cards.forEach(function (card) { card.hidden = visible.indexOf(card) === -1; });
     visible.sort(function (a, b) {
-      if (mode === "title") return a.querySelector("h3").textContent.localeCompare(b.querySelector("h3").textContent);
+      if (mode === "title") return a.querySelector(".project-title").textContent.localeCompare(b.querySelector(".project-title").textContent);
       var key = mode === "score" ? "data-score" : "data-priority";
       var first = Number(a.getAttribute(key) || 0), second = Number(b.getAttribute(key) || 0);
       return mode === "priority" ? first - second : second - first;
@@ -27,6 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
       activeStatus = button.getAttribute("data-status-filter") || "all";
       filterButtons.forEach(function (item) { item.classList.toggle("active", item === button); });
       refresh();
+    });
+  });
+  document.querySelectorAll(".project-toggle").forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      var expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      var details = document.getElementById(toggle.getAttribute("aria-controls"));
+      if (details) details.hidden = expanded;
     });
   });
   if (sort) sort.addEventListener("change", refresh);
