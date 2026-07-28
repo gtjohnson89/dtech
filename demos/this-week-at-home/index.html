@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>This Week at Home · The George Org · d-Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Persistent top bar (non-hero) -->
+    <header class="topbar" id="topbar" hidden>
+      <button type="button" class="topbar__back" data-nav="home" aria-label="Back to weekly home">←</button>
+      <p class="topbar__brand">This Week at Home</p>
+      <button type="button" class="topbar__household" data-nav="household" aria-label="My Household">Home</button>
+    </header>
+
+    <main id="main">
+      <!-- 1. Weekly Home -->
+      <section class="screen screen--home is-active" data-screen="home" aria-label="Weekly Home">
+        <div class="home-atmosphere" aria-hidden="true">
+          <div class="home-atmosphere__glow home-atmosphere__glow--dawn"></div>
+          <div class="home-atmosphere__glow home-atmosphere__glow--lamp"></div>
+          <svg class="home-illustration" viewBox="0 0 390 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="">
+            <path class="illu-window" d="M70 40h250v160H70z" stroke="currentColor" stroke-width="2" opacity=".35"/>
+            <path class="illu-pane" d="M70 120h250M195 40v160" stroke="currentColor" stroke-width="1.5" opacity=".25"/>
+            <path class="illu-sill" d="M55 200h280" stroke="currentColor" stroke-width="3" opacity=".4" stroke-linecap="round"/>
+            <circle class="illu-moon" cx="280" cy="85" r="22" fill="currentColor" opacity=".12"/>
+            <path class="illu-curtain-l" d="M70 40c20 40 15 90 0 140" stroke="currentColor" stroke-width="8" opacity=".18" stroke-linecap="round"/>
+            <path class="illu-curtain-r" d="M320 40c-20 40-15 90 0 140" stroke="currentColor" stroke-width="8" opacity=".18" stroke-linecap="round"/>
+            <path class="illu-bed" d="M90 230h120c8 0 14 6 14 14v0H76c0-8 6-14 14-14z" fill="currentColor" opacity=".1"/>
+            <path class="illu-pillow" d="M100 222h36c4 0 7 3 7 7v1H93c0-4 3-8 7-8z" fill="currentColor" opacity=".14"/>
+          </svg>
+        </div>
+
+        <div class="home-content">
+          <p class="brand-lockup">
+            <span class="brand-lockup__org">The George Org</span>
+            <span class="brand-lockup__dot" aria-hidden="true">·</span>
+            <span class="brand-lockup__dtech">d-Tech</span>
+          </p>
+          <h1 class="brand-title">This Week at Home</h1>
+          <p class="brand-lede">One shared household problem. Your lived experience. A solution moving toward home testing.</p>
+
+          <article class="featured-problem">
+            <p class="featured-problem__eyebrow">This week’s problem</p>
+            <h2 class="featured-problem__title">Night wandering — and the quiet fear that Mum isn’t safe</h2>
+            <p class="featured-problem__body">You’re half-awake at 2am, listening for footsteps in the hall. You can’t sleep properly until you know she’s back in bed.</p>
+            <p class="featured-problem__count">
+              <span class="featured-problem__number" id="household-count">327</span>
+              households recognise this
+            </p>
+          </article>
+
+          <div class="progress-trail" aria-label="Solution progress">
+            <div class="progress-trail__step is-done">
+              <span class="progress-trail__dot"></span>
+              <span class="progress-trail__label">Heard</span>
+            </div>
+            <div class="progress-trail__line is-partial"></div>
+            <div class="progress-trail__step is-active">
+              <span class="progress-trail__dot"></span>
+              <span class="progress-trail__label">Designing</span>
+            </div>
+            <div class="progress-trail__line"></div>
+            <div class="progress-trail__step">
+              <span class="progress-trail__dot"></span>
+              <span class="progress-trail__label">Home testing</span>
+            </div>
+          </div>
+          <p class="plain-state">George is building</p>
+
+          <div class="cta-group">
+            <button type="button" class="btn btn--primary" data-nav="checkin">This happens here too</button>
+            <button type="button" class="btn btn--ghost" data-nav="problem">Understand the problem</button>
+          </div>
+        </div>
+
+        <nav class="home-footer-nav" aria-label="More">
+          <button type="button" data-nav="journey">Build journey</button>
+          <button type="button" data-nav="decision">Design decision</button>
+          <button type="button" data-nav="household">My household</button>
+        </nav>
+      </section>
+
+      <!-- 2. Problem Room -->
+      <section class="screen" data-screen="problem" aria-label="Problem Room" hidden>
+        <div class="screen-inner">
+          <p class="screen-kicker">Problem room</p>
+          <h1 class="screen-title">When night feels unsafe for both of you</h1>
+          <p class="screen-lede">A caregiver-safe way to name what’s happening — without blaming Mum, and without asking you to become a night nurse.</p>
+
+          <div class="paraphrase">
+            <p class="paraphrase__label">What we’ve heard</p>
+            <blockquote class="paraphrase__quote">
+              “She gets up to use the bathroom or check the door. I hear her, and then I can’t settle until I know she’s okay. Some nights I end up sleeping lightly on purpose.”
+            </blockquote>
+          </div>
+
+          <h2 class="section-heading">Common moments</h2>
+          <ul class="moment-list">
+            <li>
+              <strong>The hallway check</strong>
+              Soft footsteps after midnight; you freeze until they stop.
+            </li>
+            <li>
+              <strong>The bathroom trip that stretches</strong>
+              Ten minutes pass. You wonder if she’s confused about where she is.
+            </li>
+            <li>
+              <strong>The front door worry</strong>
+              Coat by the door. Keys in hand. You’re already out of bed.
+            </li>
+            <li>
+              <strong>The morning fog</strong>
+              Neither of you slept well. The day starts frayed.
+            </li>
+          </ul>
+
+          <h2 class="section-heading">Needs &amp; constraints</h2>
+          <ul class="need-list">
+            <li>Alert the caregiver <em>quietly</em> — no sirens that startle Mum</li>
+            <li>Work when phones are charging downstairs</li>
+            <li>Respect dignity: no cameras in bedrooms or bathrooms</li>
+            <li>Setup under 15 minutes; no new daily routines if possible</li>
+            <li>Clear “all clear” so you can go back to sleep</li>
+          </ul>
+
+          <div class="plain-banner">We heard you</div>
+
+          <div class="cta-group">
+            <button type="button" class="btn btn--primary" data-nav="checkin">This happens here too</button>
+            <button type="button" class="btn btn--ghost" data-nav="decision">See design options</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 60-Second Check-In -->
+      <section class="screen" data-screen="checkin" aria-label="60-Second Check-In" hidden>
+        <div class="screen-inner">
+          <p class="screen-kicker">60-second check-in</p>
+          <h1 class="screen-title">Does this happen in your home?</h1>
+          <p class="screen-lede">No account required. Your answers help George prioritise what to build next.</p>
+
+          <form class="checkin-form" id="checkin-form">
+            <fieldset class="checkin-field">
+              <legend>How often does night wandering disrupt sleep?</legend>
+              <div class="choice-row" role="radiogroup">
+                <label class="choice-chip">
+                  <input type="radio" name="frequency" value="rarely" />
+                  <span>Rarely</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="frequency" value="weekly" />
+                  <span>Weekly</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="frequency" value="most-nights" checked />
+                  <span>Most nights</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="checkin-field">
+              <legend>What worries you most?</legend>
+              <div class="choice-stack" role="radiogroup">
+                <label class="choice-row-item">
+                  <input type="radio" name="worry" value="falls" />
+                  <span>Falls or getting stuck</span>
+                </label>
+                <label class="choice-row-item">
+                  <input type="radio" name="worry" value="leaving" checked />
+                  <span>Leaving the house</span>
+                </label>
+                <label class="choice-row-item">
+                  <input type="radio" name="worry" value="confusion" />
+                  <span>Confusion / not finding bed</span>
+                </label>
+                <label class="choice-row-item">
+                  <input type="radio" name="worry" value="exhaustion" />
+                  <span>My own exhaustion</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="checkin-field">
+              <legend>Optional anonymous note</legend>
+              <textarea
+                id="checkin-note"
+                name="note"
+                rows="3"
+                maxlength="280"
+                placeholder="Anything we should understand about your setup at home…"
+              ></textarea>
+              <p class="char-count"><span id="note-count">0</span>/280</p>
+            </fieldset>
+
+            <button type="submit" class="btn btn--primary btn--block">Share this with George</button>
+          </form>
+
+          <div class="checkin-thanks" id="checkin-thanks" hidden>
+            <div class="thanks-pulse" aria-hidden="true"></div>
+            <h2 class="thanks-title">Thank you — you’re on the map</h2>
+            <p class="thanks-body">Your household is counted with the others. We’ll use this to shape what gets tested first.</p>
+            <p class="plain-state plain-state--inline">We heard you · <span id="updated-count">328</span> households</p>
+            <div class="cta-group">
+              <button type="button" class="btn btn--primary" data-nav="decision">Help choose the design</button>
+              <button type="button" class="btn btn--ghost" data-nav="home">Back to this week</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Design Decision -->
+      <section class="screen" data-screen="decision" aria-label="Design Decision" hidden>
+        <div class="screen-inner">
+          <p class="screen-kicker">Design decision</p>
+          <h1 class="screen-title">Which approach feels more home-ready?</h1>
+          <p class="screen-lede">Two concepts under consideration. Your preference helps George decide what to prototype for home testing.</p>
+
+          <div class="concept-grid" id="concept-grid" role="radiogroup" aria-label="Design concepts">
+            <button type="button" class="concept is-selected" data-concept="doorway" aria-pressed="true">
+              <span class="concept__badge">Concept A</span>
+              <h2 class="concept__title">Doorway sensor</h2>
+              <p class="concept__body">A discreet sensor on Mum’s bedroom doorway. When she leaves after a quiet hour, your phone gets a gentle nudge — and another when she returns.</p>
+              <ul class="concept__pros">
+                <li>Nothing to wear or charge on Mum</li>
+                <li>No cameras</li>
+                <li>Works if she leaves the room for any reason</li>
+              </ul>
+              <span class="concept__select-label">Selected</span>
+            </button>
+
+            <button type="button" class="concept" data-concept="wearable" aria-pressed="false">
+              <span class="concept__badge">Concept B</span>
+              <h2 class="concept__title">Wearable alert</h2>
+              <p class="concept__body">A soft wristband that detects getting out of bed and unusual movement. Alerts you only when patterns look risky — not every bathroom trip.</p>
+              <ul class="concept__pros">
+                <li>Can travel beyond the bedroom</li>
+                <li>Smarter about “usual” vs “concerning”</li>
+                <li>Useful if she already wears a watch</li>
+              </ul>
+              <span class="concept__select-label">Select this</span>
+            </button>
+          </div>
+
+          <aside class="decision-result" id="decision-result" aria-live="polite">
+            <p class="decision-result__label">Current lean</p>
+            <p class="decision-result__choice" id="decision-choice">Doorway sensor</p>
+            <p class="decision-result__meta" id="decision-meta">64% of households leaned this way so far · quieter nights without asking Mum to wear anything</p>
+          </aside>
+
+          <div class="cta-group">
+            <button type="button" class="btn btn--primary" data-nav="journey">See the build journey</button>
+            <button type="button" class="btn btn--ghost" data-nav="problem">Revisit the problem</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Build Journey -->
+      <section class="screen" data-screen="journey" aria-label="Build Journey" hidden>
+        <div class="screen-inner">
+          <p class="screen-kicker">Build journey</p>
+          <h1 class="screen-title">From sketches to home testing</h1>
+          <p class="screen-lede">What George has done with what you shared — and what’s next.</p>
+
+          <ol class="timeline" id="build-timeline">
+            <li class="timeline__item is-complete">
+              <span class="timeline__marker"></span>
+              <div class="timeline__content">
+                <p class="timeline__date">Week of 7 Jul</p>
+                <h2 class="timeline__title">Problem framed with caregivers</h2>
+                <p>12 households described night wandering in their own words. Theme: “I need to know she’s okay so I can sleep.”</p>
+              </div>
+            </li>
+            <li class="timeline__item is-complete">
+              <span class="timeline__marker"></span>
+              <div class="timeline__content">
+                <p class="timeline__date">Week of 14 Jul</p>
+                <h2 class="timeline__title">Sketches &amp; constraints</h2>
+                <p>Paper concepts for doorway sensing vs wearable. Rule set: no bedroom cameras, under-15-minute setup, quiet alerts only.</p>
+                <div class="sketch-strip" aria-hidden="true">
+                  <div class="sketch sketch--door"></div>
+                  <div class="sketch sketch--band"></div>
+                  <div class="sketch sketch--phone"></div>
+                </div>
+              </div>
+            </li>
+            <li class="timeline__item is-current">
+              <span class="timeline__marker"></span>
+              <div class="timeline__content">
+                <p class="timeline__date">This week</p>
+                <h2 class="timeline__title">Concept lean &amp; breadboard build</h2>
+                <p>Doorway sensor leading. First breadboard confirms hallway exit events without false triggers from hallway drafts.</p>
+                <p class="plain-state plain-state--inline">George is building</p>
+              </div>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__marker"></span>
+              <div class="timeline__content">
+                <p class="timeline__date">Next</p>
+                <h2 class="timeline__title">Home testing</h2>
+                <p>Four volunteer households will run a two-week quiet trial: night alerts only, morning diary optional.</p>
+                <p class="plain-state plain-state--inline">Testing in 4 homes</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="evidence">
+            <h2 class="section-heading">Early evidence</h2>
+            <ul class="evidence-list">
+              <li><strong>0 cameras</strong> in any prototype path</li>
+              <li><strong>2</strong> false hallway triggers fixed in lab</li>
+              <li><strong>4</strong> homes queued for the first quiet trial</li>
+            </ul>
+          </div>
+
+          <div class="cta-group">
+            <button type="button" class="btn btn--primary" data-nav="household">My household</button>
+            <button type="button" class="btn btn--ghost" data-nav="home">This week’s home</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. My Household -->
+      <section class="screen" data-screen="household" aria-label="My Household" hidden>
+        <div class="screen-inner">
+          <p class="screen-kicker">My household</p>
+          <h1 class="screen-title">What you’re following</h1>
+          <p class="screen-lede">Problems you’ve recognised, notes you’ve shared, and where each solution stands.</p>
+
+          <article class="follow-item follow-item--featured">
+            <div class="follow-item__head">
+              <h2>Night wandering / safe nights</h2>
+              <span class="status-pill status-pill--building">Designing</span>
+            </div>
+            <p>You said this happens most nights. You’re worried about leaving the house.</p>
+            <p class="follow-item__meta">Contribution: me-too + optional note · Updated today</p>
+            <button type="button" class="text-link" data-nav="journey">View build journey →</button>
+          </article>
+
+          <h2 class="section-heading">Also in your home</h2>
+          <ul class="follow-list">
+            <li class="follow-item">
+              <div class="follow-item__head">
+                <h3>Appliance unplugging</h3>
+                <span class="status-pill status-pill--heard">Heard</span>
+              </div>
+              <p>Kettle and toaster found unplugged; worry about forgetting the freezer.</p>
+              <p class="follow-item__meta">89 households · Gathering moments</p>
+            </li>
+            <li class="follow-item">
+              <div class="follow-item__head">
+                <h3>Med packs at the wrong time</h3>
+                <span class="status-pill status-pill--building">Designing</span>
+              </div>
+              <p>Blister packs opened early — or skipped when the day feels scrambled.</p>
+              <p class="follow-item__meta">214 households · Concept sketches this month</p>
+            </li>
+            <li class="follow-item">
+              <div class="follow-item__head">
+                <h3>Hiding keys</h3>
+                <span class="status-pill status-pill--heard">Heard</span>
+              </div>
+              <p>Keys disappear into drawers and coat pockets; leaving the house becomes a hunt.</p>
+              <p class="follow-item__meta">156 households · Looking for patterns</p>
+            </li>
+            <li class="follow-item">
+              <div class="follow-item__head">
+                <h3>Bathroom recognition at night</h3>
+                <span class="status-pill status-pill--testing">Home testing</span>
+              </div>
+              <p>Finding the bathroom in the dark without turning on bright lights.</p>
+              <p class="follow-item__meta">Testing in 4 homes · Soft path lighting trial</p>
+            </li>
+          </ul>
+
+          <div class="cta-group">
+            <button type="button" class="btn btn--primary" data-nav="home">Back to this week</button>
+            <button type="button" class="btn btn--ghost" data-nav="checkin">Add another check-in</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
