@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>d-Tech · Direction demos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#142018; --muted:#5d6b62; --paper:#f3eee4; --forest:#1a221c; --orange:#e36a2c; }
+    body { margin:0; font-family:Manrope,sans-serif; background:linear-gradient(160deg,#ebe4d6,#e7efe8); color:var(--ink); min-height:100vh; }
+    main { width:min(36rem, calc(100% - 2rem)); margin:0 auto; padding:2rem 0 3rem; }
+    h1 { font-family:Fraunces,Georgia,serif; font-size:clamp(1.8rem,7vw,2.4rem); line-height:1.1; margin:0 0 .6rem; }
+    p { color:var(--muted); line-height:1.45; }
+    a.card { display:block; text-decoration:none; color:inherit; background:rgba(255,250,242,.9); border:1px solid rgba(20,32,24,.12); border-radius:16px; padding:1rem 1.1rem; margin:.7rem 0; box-shadow:0 12px 28px rgba(20,32,24,.08); }
+    a.card strong { display:block; font-family:Fraunces,Georgia,serif; font-size:1.2rem; margin-bottom:.25rem; }
+    a.card span { color:var(--muted); font-size:.92rem; }
+    .primary { background:var(--forest); color:#f7f3ea; }
+    .primary strong, .primary span { color:#f7f3ea; }
+    .primary span { opacity:.8; }
+  </style>
+</head>
+<body>
+  <main>
+    <p style="font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#3f6b4f;margin:0 0 .5rem">The George Org · d-Tech</p>
+    <h1>Three platform directions</h1>
+    <p>Start with the mobile presentation, then open any live demo.</p>
+    <a class="card primary" href="./presentation/">
+      <strong>Mobile presentation</strong>
+      <span>Swipe deck with screenshots + thesis for each bet</span>
+    </a>
+    <a class="card" href="./care-trials/"><strong>Care Trials</strong><span>Home trials → check-ins → product variants</span></a>
+    <a class="card" href="./this-week-at-home/"><strong>This Week at Home</strong><span>Weekly caregiver ritual + visible build progress</span></a>
+    <a class="card" href="./care-build-foundry/"><strong>Care Build Foundry</strong><span>Operator workbench with Grok proposals + BOMs</span></a>
+  </main>
+</body>
+</html>

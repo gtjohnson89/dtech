@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a221c">
+  <meta name="description" content="Three product directions for The George Org d-Tech platform — Care Trials, This Week at Home, Care Build Foundry.">
+  <title>d-Tech · Three Directions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #142018;
+      --muted: #5d6b62;
+      --paper: #f3eee4;
+      --panel: #fffaf2;
+      --line: rgba(20, 32, 24, 0.12);
+      --forest: #1a221c;
+      --moss: #3f6b4f;
+      --orange: #e36a2c;
+      --teal: #2f7a6b;
+      --charcoal: #2a3130;
+      --shadow: 0 18px 40px rgba(20, 32, 24, 0.16);
+      --radius: 18px;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(120% 80% at 10% -10%, #d9e7d8 0%, transparent 55%),
+        radial-gradient(90% 70% at 110% 0%, #f0d7c2 0%, transparent 50%),
+        linear-gradient(180deg, #ebe4d6 0%, var(--paper) 40%, #e7efe8 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck {
+      height: 100dvh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
+    }
+
+    .slide {
+      min-height: 100dvh;
+      scroll-snap-align: start;
+      padding: calc(1.1rem + var(--safe-t)) 1rem calc(5.5rem + var(--safe-b));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide-inner {
+      width: min(100%, 34rem);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 0.85rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 99px;
+      background: var(--orange);
+      box-shadow: 0 0 0 4px rgba(227, 106, 44, 0.18);
+    }
+
+    h1, h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin: 0 0 0.75rem;
+    }
+    h1 { font-size: clamp(2.1rem, 8vw, 3rem); }
+    h2 { font-size: clamp(1.55rem, 6.2vw, 2.2rem); }
+    p { margin: 0 0 1rem; color: var(--muted); line-height: 1.5; font-size: 1rem; }
+    .lede { font-size: 1.05rem; color: #334038; }
+
+    .brand-mark {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(1.7rem, 6vw, 2.2rem);
+      margin: 0 0 0.35rem;
+      color: var(--forest);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 1.1rem 0 0.4rem;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(255,250,242,0.72);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 0.42rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .chip:active { transform: scale(0.98); }
+
+    .panel {
+      background: rgba(255,250,242,0.88);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+    .meta {
+      border-top: 1px solid var(--line);
+      padding-top: 0.7rem;
+    }
+    .meta strong {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 0.2rem;
+    }
+    .meta span { color: var(--ink); font-size: 0.95rem; line-height: 1.4; }
+
+    .btn-row {
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 1.1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 3rem;
+      border-radius: 999px;
+      padding: 0.7rem 1.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: var(--forest);
+      color: #f7f3ea;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--forest);
+      border-color: rgba(20,32,24,0.22);
+    }
+
+    .phone-frame {
+      margin: 0.9rem auto 0;
+      width: min(100%, 20.5rem);
+      border-radius: 1.35rem;
+      overflow: hidden;
+      border: 1px solid rgba(20,32,24,0.18);
+      background: #111;
+      box-shadow: var(--shadow);
+    }
+    .phone-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #ddd;
+    }
+
+    .shot-stack {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+    .shot-caption {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 0.35rem 0 0;
+      text-align: center;
+    }
+
+    .compare {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+    .compare a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,250,242,0.9);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 10px 24px rgba(20,32,24,0.08);
+    }
+    .compare a strong {
+      display: block;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.2rem;
+      color: var(--ink);
+    }
+    .compare a span { color: var(--muted); font-size: 0.88rem; line-height: 1.35; }
+
+    .dots {
+      position: fixed;
+      right: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.42rem;
+      z-index: 20;
+    }
+    .dots a {
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 99px;
+      background: rgba(20,32,24,0.22);
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+    .dots a.active { background: var(--orange); height: 1.05rem; }
+
+    .bottom-bar {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 30;
+      padding: 0.55rem 0.75rem calc(0.55rem + var(--safe-b));
+      background: linear-gradient(180deg, transparent, rgba(26,34,28,0.88) 35%);
+      display: flex;
+      gap: 0.45rem;
+      justify-content: center;
+    }
+    .bottom-bar a {
+      flex: 1;
+      max-width: 8.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: #f4efe6;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 0.7rem 0.4rem;
+      backdrop-filter: blur(10px);
+    }
+    .bottom-bar a.active {
+      background: var(--orange);
+      border-color: transparent;
+      color: #1a120c;
+    }
+
+    .swipe-hint {
+      margin-top: 1.4rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(20,32,24,0.55);
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); opacity: 0.7; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+
+    .slide--dark {
+      background:
+        radial-gradient(90% 60% at 80% 0%, rgba(227,106,44,0.28), transparent 55%),
+        radial-gradient(70% 50% at 0% 100%, rgba(63,107,79,0.35), transparent 50%),
+        linear-gradient(165deg, #151c17 0%, #243128 55%, #1a221c 100%);
+      color: #f4efe6;
+    }
+    .slide--dark p, .slide--dark .lede { color: rgba(244,239,230,0.78); }
+    .slide--dark .eyebrow { color: #9fd0ad; }
+    .slide--dark .brand-mark { color: #fff; }
+    .slide--dark .chip {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.14);
+      color: #f4efe6;
+    }
+
+    .slide--trials {
+      background:
+        radial-gradient(100% 70% at 50% -20%, #2b241d 0%, transparent 55%),
+        linear-gradient(180deg, #1d1814 0%, #2a211a 35%, #f3eee4 35%, #efe7d8 100%);
+    }
+    .slide--trials .hero-copy { color: #f7f1e8; margin-bottom: 0.4rem; }
+    .slide--trials .hero-copy p { color: rgba(247,241,232,0.78); }
+
+    .slide--week {
+      background:
+        radial-gradient(90% 60% at 100% 0%, #c9e4dc, transparent 55%),
+        linear-gradient(180deg, #eef6f2 0%, var(--paper) 100%);
+    }
+
+    .slide--foundry {
+      background:
+        radial-gradient(80% 50% at 0% 0%, #f0d3b8, transparent 50%),
+        linear-gradient(180deg, #f7f2ea 0%, #ebe4d6 100%);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 0.55rem;
+    }
+    .tag-orange { background: rgba(227,106,44,0.16); color: #a64512; }
+    .tag-teal { background: rgba(47,122,107,0.14); color: #1f5a4e; }
+    .tag-char { background: rgba(42,49,48,0.12); color: #2a3130; }
+
+    @media (min-width: 720px) {
+      .slide { padding-inline: 2rem; }
+      .shot-stack.two {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="dots" aria-label="Slide navigation">
+    <a href="#intro" class="active">Intro</a>
+    <a href="#trials">Care Trials</a>
+    <a href="#trials-flow">Trials flow</a>
+    <a href="#week">This Week</a>
+    <a href="#week-flow">Week flow</a>
+    <a href="#foundry">Foundry</a>
+    <a href="#foundry-flow">Foundry flow</a>
+    <a href="#compare">Compare</a>
+  </nav>
+
+  <nav class="bottom-bar" aria-label="Jump to direction">
+    <a href="#intro" data-bar="intro">Overview</a>
+    <a href="#trials" data-bar="trials">Trials</a>
+    <a href="#week" data-bar="week">Weekly</a>
+    <a href="#foundry" data-bar="foundry">Foundry</a>
+  </nav>
+
+  <main class="deck" id="deck">
+    <!-- INTRO -->
+    <section class="slide slide--dark" id="intro">
+      <div class="slide-inner">
+        <p class="eyebrow">Product strategy · mobile deck</p>
+        <p class="brand-mark">The George Org</p>
+        <h1>Three directions for d-Tech</h1>
+        <p class="lede">
+          GPT agents pressure-tested the bets. Grok agents built each demo in a silo.
+          Swipe through screenshots, then open the live prototypes.
+        </p>
+        <div class="chip-row">
+          <a class="chip" href="#trials">1 · Care Trials</a>
+          <a class="chip" href="#week">2 · This Week at Home</a>
+          <a class="chip" href="#foundry">3 · Care Build Foundry</a>
+        </div>
+        <p class="swipe-hint">Swipe up</p>
+      </div>
+    </section>
+
+    <!-- CARE TRIALS -->
+    <section class="slide slide--trials" id="trials">
+      <div class="slide-inner">
+        <div class="hero-copy">
+          <span class="tag tag-orange">Direction 1 · Caregiver</span>
+          <h2>Care Trials</h2>
+          <p>Turn recurring care problems into short, reversible home trials — then grow the winners into product variants.</p>
+        </div>
+        <div class="phone-frame">
+          <img src="../screenshots/care-trials__care-moments-home.png" alt="Care Trials home screen: choose a care moment" loading="eager">
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="../care-trials/" target="_blank" rel="noopener">Open live demo</a>
+        </div>
+        <div class="panel meta-grid" style="margin-top:1rem">
+          <div class="meta"><strong>Core loop</strong><span>Pick a care moment → try a 7-day trial → check in in seconds → variants emerge from what families change.</span></div>
+          <div class="meta"><strong>Why it wins</strong><span>Not another feed — a field guide that returns value to the caregiver immediately.</span></div>
+          <div class="meta"><strong>Biggest risk</strong><span>Feeling like homework. Trials must stay tiny, reversible, and low-friction.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="trials-flow">
+      <div class="slide-inner">
+        <p class="eyebrow">Care Trials · flow</p>
+        <h2>From moment to evidence</h2>
+        <p>Problem portrait → trial recipe → check-in → family learning → George’s workbench.</p>
+        <div class="shot-stack two">
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-trials__problem-portrait.png" alt="Problem portrait screen" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Problem portrait</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-trials__trial-plan.png" alt="Trial plan screen" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Trial plan</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-trials__quick-checkin.png" alt="Quick check-in screen" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Quick check-in</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-trials__georges-workbench.png" alt="George workbench screen" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">George’s workbench</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- THIS WEEK -->
+    <section class="slide slide--week" id="week">
+      <div class="slide-inner">
+        <span class="tag tag-teal">Direction 2 · Community ritual</span>
+        <h2>This Week at Home</h2>
+        <p>A weekly shared problem. Sixty seconds of lived experience. Visible progress toward home testing.</p>
+        <div class="phone-frame">
+          <img src="../screenshots/this-week-at-home__home.png" alt="This Week at Home featured weekly problem" loading="lazy">
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="../this-week-at-home/" target="_blank" rel="noopener">Open live demo</a>
+        </div>
+        <div class="panel meta-grid" style="margin-top:1rem">
+          <div class="meta"><strong>Core loop</strong><span>See this week’s need → “This happens here too” → pick a design lean → follow the build journey.</span></div>
+          <div class="meta"><strong>Why it wins</strong><span>Emotional recognition + closed loop. Caregivers feel heard and see what changed because they showed up.</span></div>
+          <div class="meta"><strong>Biggest risk</strong><span>Weekly focus misses some households — followed problems must stay reachable.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="week-flow">
+      <div class="slide-inner">
+        <p class="eyebrow">This Week at Home · flow</p>
+        <h2>Recognition → decision → journey</h2>
+        <p>Problem room, one-minute check-in, concept vote, and household follow list.</p>
+        <div class="shot-stack two">
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/this-week-at-home__problem.png" alt="Problem room" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Problem room</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/this-week-at-home__checkin.png" alt="Sixty second check-in" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">60-second check-in</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/this-week-at-home__decision.png" alt="Design decision" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Design decision</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/this-week-at-home__journey.png" alt="Build journey" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Build journey</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDRY -->
+    <section class="slide slide--foundry" id="foundry">
+      <div class="slide-inner">
+        <span class="tag tag-char">Direction 3 · Operator</span>
+        <h2>Care Build Foundry</h2>
+        <p>George’s build OS: ranked problems, Grok proposals you approve, variant branches, and costed prototype kits.</p>
+        <div class="phone-frame">
+          <img src="../screenshots/care-build-foundry__build-control.png" alt="Care Build Foundry TV Companion mission control" loading="lazy">
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="../care-build-foundry/" target="_blank" rel="noopener">Open live demo</a>
+        </div>
+        <div class="panel meta-grid" style="margin-top:1rem">
+          <div class="meta"><strong>Core loop</strong><span>Signal → problem → Grok change set → approve/branch → BOM + field trial → promote baseline.</span></div>
+          <div class="meta"><strong>Why it wins</strong><span>Connects caregiver evidence to shippable hardware — AI stays a labeled proposal, never invisible authority.</span></div>
+          <div class="meta"><strong>Biggest risk</strong><span>False confidence from tidy BOMs. Every kit needs visible assumptions and safety gates.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="foundry-flow">
+      <div class="slide-inner">
+        <p class="eyebrow">Care Build Foundry · flow</p>
+        <h2>Proposal → kit → field</h2>
+        <p>Variant tree, Grok review, BOM, and trial promotion for TV Companion.</p>
+        <div class="shot-stack two">
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-build-foundry__variant-tree.png" alt="Variant tree" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Variant tree</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-build-foundry__proposal-review.png" alt="Proposal review" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Proposal review</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-build-foundry__build-kit.png" alt="Build kit BOM" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Build kit</figcaption>
+          </figure>
+          <figure>
+            <div class="phone-frame">
+              <img src="../screenshots/care-build-foundry__field-trial.png" alt="Field trial" loading="lazy">
+            </div>
+            <figcaption class="shot-caption">Field trial</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="slide slide--dark" id="compare">
+      <div class="slide-inner">
+        <p class="eyebrow">How to choose</p>
+        <h2>Same research spine. Three product faces.</h2>
+        <p class="lede">All three keep Terra’s rule: the caregiver problem is the durable unit. They differ in who the first viewport serves.</p>
+        <div class="compare">
+          <a href="../care-trials/">
+            <strong>Care Trials</strong>
+            <span>Primary user: caregiver. Bet: actionable home experiments that create product evidence.</span>
+          </a>
+          <a href="../this-week-at-home/">
+            <strong>This Week at Home</strong>
+            <span>Primary user: caregiver community. Bet: weekly ritual + emotional recognition + visible progress.</span>
+          </a>
+          <a href="../care-build-foundry/">
+            <strong>Care Build Foundry</strong>
+            <span>Primary user: George. Bet: operator foundry where Grok proposes, you approve, kits ship.</span>
+          </a>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#intro">Back to start</a>
+          <a class="btn btn-secondary" href="../" style="color:#f4efe6;border-color:rgba(244,239,230,0.28)">All demos folder</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const deck = document.getElementById("deck");
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const dots = Array.from(document.querySelectorAll(".dots a"));
+      const bars = Array.from(document.querySelectorAll(".bottom-bar a"));
+
+      function activeId() {
+        let best = slides[0];
+        let bestDist = Infinity;
+        const mid = deck.scrollTop + deck.clientHeight * 0.35;
+        for (const s of slides) {
+          const top = s.offsetTop;
+          const dist = Math.abs(top - deck.scrollTop);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = s;
+          }
+        }
+        return best.id;
+      }
+
+      function sync() {
+        const id = activeId();
+        dots.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+        const map = {
+          intro: "intro",
+          trials: "trials",
+          "trials-flow": "trials",
+          week: "week",
+          "week-flow": "week",
+          foundry: "foundry",
+          "foundry-flow": "foundry",
+          compare: "intro",
+        };
+        const bar = map[id] || "intro";
+        bars.forEach((a) => a.classList.toggle("active", a.getAttribute("data-bar") === bar));
+      }
+
+      deck.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
+      sync();
+    })();
+  </script>
+</body>
+</html>

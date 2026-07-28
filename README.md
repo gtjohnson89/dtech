@@ -11,6 +11,7 @@ Also keeps the original static snapshot under `dtech/` for research JSON and the
 | `apps/api` | FastAPI + PostgreSQL platform API |
 | `apps/web` | React/Vite caregiver-facing UI |
 | `dtech/` | Research JSON seed, carts, legacy static dashboard |
+| `demos/` | Three siloed product-direction prototypes + mobile presentation |
 
 ## Prerequisites
 
