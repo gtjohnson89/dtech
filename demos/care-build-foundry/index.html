@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Care Build Foundry · The George Org · d-Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="blueprint-bg" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="topbar__org">The George Org · d-Tech</span>
+      <span class="topbar__product">Care Build Foundry</span>
+    </div>
+    <nav class="topbar__nav" aria-label="Build screens">
+      <button type="button" class="nav-btn is-active" data-nav="build-control">Build Control</button>
+      <button type="button" class="nav-btn" data-nav="problem-brief">Problem Brief</button>
+      <button type="button" class="nav-btn" data-nav="variant-tree">Variant Tree</button>
+      <button type="button" class="nav-btn" data-nav="proposal-review">Proposal Review</button>
+      <button type="button" class="nav-btn" data-nav="build-kit">Build Kit</button>
+      <button type="button" class="nav-btn" data-nav="field-trial">Field Trial</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- 1. BUILD CONTROL (HERO) -->
+    <section class="screen is-active" data-screen="build-control" aria-label="Build Control">
+      <div class="hero">
+        <div class="hero__atmosphere" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="hero__brand">The George Org · d-Tech</p>
+          <h1 class="hero__title">Care Build Foundry</h1>
+          <p class="hero__lede">Operator workbench: ranked caregiver problems become costed, testable prototype kits.</p>
+
+          <div class="mission" id="mission-panel">
+            <div class="mission__header">
+              <span class="mission__label">Active build</span>
+              <h2 class="mission__name">TV Companion</h2>
+              <span class="mission__status" id="mission-status" data-state="pending">Proposal awaiting approval</span>
+            </div>
+
+            <dl class="mission__grid">
+              <div>
+                <dt>Problem</dt>
+                <dd>Grandparent can’t change channels without calling for help</dd>
+              </div>
+              <div>
+                <dt>Prototype / variant</dt>
+                <dd id="mission-variant">Voice-first · v0.4 bench unit</dd>
+              </div>
+              <div>
+                <dt>Grok proposal</dt>
+                <dd id="mission-proposal">Wake-word + volume ceiling for night use</dd>
+              </div>
+              <div>
+                <dt>Build readiness</dt>
+                <dd><span class="readiness" id="mission-readiness" data-level="amber">Parts staged · firmware unapproved</span></dd>
+              </div>
+              <div>
+                <dt>Est. prototype cost</dt>
+                <dd class="mission__cost" id="mission-cost">$47.20</dd>
+              </div>
+              <div>
+                <dt>Blockers</dt>
+                <dd id="mission-blockers">Pending decision on night-volume ceiling</dd>
+              </div>
+            </dl>
+
+            <div class="mission__cta">
+              <button type="button" class="btn btn--primary btn--cta-pulse" data-goto="proposal-review" id="hero-cta">
+                Review next change
+              </button>
+              <button type="button" class="btn btn--ghost" data-goto="problem-brief">Open problem brief</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="portfolio" aria-label="Secondary builds">
+        <h2 class="portfolio__title">Other builds in queue</h2>
+        <ul class="portfolio__list">
+          <li><button type="button" class="teaser" data-teaser="auto-answer"><span class="teaser__name">Auto-Answer Calls</span><span class="teaser__meta">Rank #2 · kit draft</span></button></li>
+          <li><button type="button" class="teaser" data-teaser="church-radio"><span class="teaser__name">Church Radio</span><span class="teaser__meta">Rank #4 · field trial</span></button></li>
+          <li><button type="button" class="teaser" data-teaser="scam-safe"><span class="teaser__name">Scam-Safe Launcher</span><span class="teaser__meta">Rank #3 · proposal</span></button></li>
+          <li><button type="button" class="teaser" data-teaser="night-light"><span class="teaser__name">Night Wandering Light</span><span class="teaser__meta">Rank #5 · BOM hold</span></button></li>
+        </ul>
+        <p class="portfolio__note" id="teaser-note" hidden></p>
+      </aside>
+    </section>
+
+    <!-- 2. PROBLEM BRIEF -->
+    <section class="screen" data-screen="problem-brief" aria-label="Problem Brief" hidden>
+      <div class="screen__head">
+        <p class="eyebrow">Signal from caregivers</p>
+        <h2>Problem Brief · TV Companion</h2>
+        <p class="screen__sub">Ranked need with paraphrases, constraints, and linked projects. Caregivers are signal — George operates the build.</p>
+      </div>
+
+      <div class="brief">
+        <div class="brief__rank">
+          <span class="brief__rank-num">#1</span>
+          <div>
+            <h3>Channel &amp; volume control without a helper in the room</h3>
+            <p>Need score 9.2 · 14 caregiver reports · last 21 days</p>
+          </div>
+        </div>
+
+        <div class="brief__block">
+          <h3>Caregiver paraphrases</h3>
+          <blockquote>“She can hear the TV fine — she just can’t find the right button and freezes.”</blockquote>
+          <blockquote>“Every channel change is a phone call. We’re exhausted.”</blockquote>
+          <blockquote>“Remote has 40 buttons. He needs three, max.”</blockquote>
+        </div>
+
+        <div class="brief__cols">
+          <div class="brief__block">
+            <h3>Constraints</h3>
+            <ul class="checklist">
+              <li>No smartphone dependency for daily use</li>
+              <li>Works with existing cable / streaming box IR</li>
+              <li>Prototype kit under $60 parts</li>
+              <li>Installable by family in under 20 minutes</li>
+              <li>Fail-soft: physical mute always reachable</li>
+            </ul>
+          </div>
+          <div class="brief__block">
+            <h3>Linked projects</h3>
+            <ul class="link-list">
+              <li><button type="button" data-goto="variant-tree">TV Companion variants</button></li>
+              <li><button type="button" data-goto="build-kit">Bench kit · Voice-first</button></li>
+              <li><button type="button" class="teaser-inline" data-teaser="scam-safe">Scam-Safe Launcher (shared remote UX)</button></li>
+              <li><button type="button" class="teaser-inline" data-teaser="auto-answer">Auto-Answer Calls (shared wake audio)</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="screen__actions">
+          <button type="button" class="btn btn--primary" data-goto="variant-tree">Inspect variant tree</button>
+          <button type="button" class="btn btn--ghost" data-goto="build-control">Back to build control</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. VARIANT TREE -->
+    <section class="screen" data-screen="variant-tree" aria-label="Variant Tree" hidden>
+      <div class="screen__head">
+        <p class="eyebrow">Product family</p>
+        <h2>Variant Tree · TV Companion</h2>
+        <p class="screen__sub">Select a branch. George keeps one active prototype path; siblings stay costed options.</p>
+      </div>
+
+      <div class="tree" role="radiogroup" aria-label="TV Companion variants">
+        <button type="button" class="branch is-selected" role="radio" aria-checked="true" data-variant="voice-first">
+          <span class="branch__path">TV Companion</span>
+          <span class="branch__name">Voice-first</span>
+          <span class="branch__detail">Mic array · wake word · IR blaster</span>
+          <span class="branch__meta">Active bench · $47.20 · readiness amber</span>
+        </button>
+        <button type="button" class="branch" role="radio" aria-checked="false" data-variant="one-button">
+          <span class="branch__path">TV Companion</span>
+          <span class="branch__name">One-button remote</span>
+          <span class="branch__detail">Single oversized toggle · cycle presets</span>
+          <span class="branch__meta">Draft · $28.40 · parts ready</span>
+        </button>
+        <button type="button" class="branch" role="radio" aria-checked="false" data-variant="auto-schedule">
+          <span class="branch__path">TV Companion</span>
+          <span class="branch__name">Automatic schedule</span>
+          <span class="branch__detail">Clock · favorite slots · no daily decisions</span>
+          <span class="branch__meta">Concept · $36.10 · needs caregiver confirm</span>
+        </button>
+      </div>
+
+      <p class="tree__feedback" id="variant-feedback" aria-live="polite">Voice-first is the active prototype path.</p>
+
+      <div class="screen__actions">
+        <button type="button" class="btn btn--primary" data-goto="proposal-review">Review Grok proposal</button>
+        <button type="button" class="btn btn--ghost" data-goto="build-kit">Open build kit</button>
+      </div>
+    </section>
+
+    <!-- 4. PROPOSAL REVIEW -->
+    <section class="screen" data-screen="proposal-review" aria-label="Proposal Review" hidden>
+      <div class="screen__head">
+        <p class="eyebrow">Grok proposal · not authority</p>
+        <h2>Proposal Review</h2>
+        <p class="screen__sub">AI suggests the change. George approves, revises, or rejects before anything hits the kit.</p>
+      </div>
+
+      <article class="proposal" id="proposal-panel" data-decision="pending">
+        <header class="proposal__banner">
+          <span class="ai-badge">Grok proposal</span>
+          <h3 id="proposal-title">Wake-word + volume ceiling for night use</h3>
+          <p class="proposal__status" id="proposal-status">Awaiting operator decision</p>
+        </header>
+
+        <div class="proposal__compare">
+          <div>
+            <h4>Before</h4>
+            <p>Voice commands always available. Volume follows last spoken level with no night guardrail.</p>
+          </div>
+          <div>
+            <h4>After (proposed)</h4>
+            <p>Between 21:00–07:00, wake word required; spoken volume capped at 35%. Physical mute unchanged.</p>
+          </div>
+        </div>
+
+        <div class="proposal__meta-row">
+          <div>
+            <h4>Components touched</h4>
+            <ul>
+              <li>ESP32 firmware schedule block</li>
+              <li>Mic wake threshold table</li>
+              <li>IR volume map (night profile)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Cost delta</h4>
+            <p class="mono">+$0.00 parts · ~2h firmware</p>
+            <h4>Risks</h4>
+            <ul>
+              <li>False wake at night if TV loud</li>
+              <li>Caregiver may need clock set correctly</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="proposal__actions" id="proposal-actions">
+          <button type="button" class="btn btn--approve" data-decision="approve">Approve</button>
+          <button type="button" class="btn btn--revise" data-decision="revise">Revise</button>
+          <button type="button" class="btn btn--reject" data-decision="reject">Reject</button>
+        </div>
+        <p class="proposal__feedback" id="proposal-feedback" aria-live="polite"></p>
+      </article>
+
+      <div class="screen__actions">
+        <button type="button" class="btn btn--primary" data-goto="build-kit">Open build kit</button>
+        <button type="button" class="btn btn--ghost" data-goto="build-control">Return to workbench</button>
+      </div>
+    </section>
+
+    <!-- 5. BUILD KIT -->
+    <section class="screen" data-screen="build-kit" aria-label="Build Kit" hidden>
+      <div class="screen__head">
+        <p class="eyebrow">Costed prototype kit</p>
+        <h2>Build Kit · <span id="kit-variant-label">Voice-first</span></h2>
+        <p class="screen__sub">BOM, suppliers, substitutions, assembly. Totals recalculate when you swap parts.</p>
+      </div>
+
+      <div class="kit">
+        <div class="kit__summary">
+          <div>
+            <span class="kit__label">Prototype total</span>
+            <strong class="kit__total mono" id="kit-total">$47.20</strong>
+          </div>
+          <div>
+            <span class="kit__label">Assembly</span>
+            <strong>~45 min</strong>
+          </div>
+          <div>
+            <span class="kit__label">Readiness</span>
+            <strong id="kit-readiness">Amber — firmware pending</strong>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="bom" id="bom-table">
+            <thead>
+              <tr>
+                <th>Part</th>
+                <th>Supplier</th>
+                <th>State</th>
+                <th>Sub?</th>
+                <th class="num">Cost</th>
+              </tr>
+            </thead>
+            <tbody id="bom-body"></tbody>
+          </table>
+        </div>
+
+        <div class="kit__steps">
+          <h3>Assembly steps</h3>
+          <ol id="assembly-steps">
+            <li>Flash ESP32 with TV Companion base firmware (bench cable).</li>
+            <li>Seat mic board on header; verify I2S orientation mark facing out.</li>
+            <li>Wire IR LED to GPIO 4 via 100Ω; heat-shrink tip.</li>
+            <li>Fit enclosure; leave mute button travel clear.</li>
+            <li>Pair against living-room box; run channel ± and mute smoke test.</li>
+          </ol>
+        </div>
+
+        <div class="screen__actions">
+          <button type="button" class="btn btn--primary" data-goto="field-trial">Send to field trial</button>
+          <button type="button" class="btn btn--ghost" data-goto="variant-tree">Change variant</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FIELD TRIAL -->
+    <section class="screen" data-screen="field-trial" aria-label="Field Trial" hidden>
+      <div class="screen__head">
+        <p class="eyebrow">Testable in the home</p>
+        <h2>Field Trial · TV Companion</h2>
+        <p class="screen__sub">Protocol, caregiver observations, failures. Promote a variant only when the trial clears.</p>
+      </div>
+
+      <div class="trial">
+        <div class="trial__block">
+          <h3>Test protocol</h3>
+          <ol>
+            <li>Install with family present; time the setup (target ≤ 20 min).</li>
+            <li>Three days of independent channel / volume use; helper on-call only.</li>
+            <li>Night session: confirm volume ceiling and wake-word behavior.</li>
+            <li>Log every helper call and every failure mode.</li>
+          </ol>
+        </div>
+
+        <div class="trial__block">
+          <h3>Caregiver observations</h3>
+          <ul class="obs-list" id="obs-list">
+            <li data-ok="true">Day 1: found “news” by voice without calling daughter.</li>
+            <li data-ok="true">Day 2: mute worked; volume felt “soft enough” after 9pm.</li>
+            <li data-ok="false">Day 2 night: two false wakes during loud movie — needs threshold tweak.</li>
+          </ul>
+        </div>
+
+        <div class="trial__block">
+          <h3>Failures logged</h3>
+          <ul class="fail-list">
+            <li><span class="tag tag--amber">Open</span> False wake at night (movie dialogue)</li>
+            <li><span class="tag tag--closed">Closed</span> IR miss on DVR — fixed with LED aim shim</li>
+          </ul>
+        </div>
+
+        <div class="trial__promote" id="promote-panel">
+          <h3>Baseline promotion</h3>
+          <p>Promote <strong id="promote-variant">Voice-first</strong> to household baseline only after open failures are cleared or accepted.</p>
+          <button type="button" class="btn btn--primary" id="promote-btn">Promote variant to baseline</button>
+          <p class="trial__feedback" id="promote-feedback" aria-live="polite"></p>
+        </div>
+
+        <div class="screen__actions">
+          <button type="button" class="btn btn--ghost" data-goto="proposal-review">Back to proposal</button>
+          <button type="button" class="btn btn--ghost" data-goto="build-control">Workbench</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Care Build Foundry demo · static offline</span>
+    <span>The George Org · d-Tech</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
