@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Care Trials · The George Org · d-Tech</title>
+  <meta name="description" content="Turn recurring dementia-care problems into short, low-risk home trials." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="app-shell">
+    <header class="topbar" id="topbar" hidden>
+      <button type="button" class="back-btn" id="back-btn" aria-label="Go back">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back
+      </button>
+      <p class="topbar-brand">Care Trials</p>
+      <span class="topbar-spacer" aria-hidden="true"></span>
+    </header>
+
+    <main id="main">
+      <!-- 1. Care Moments Home -->
+      <section class="screen screen--home is-active" id="screen-home" data-screen="care-moments-home" aria-label="Care Moments Home">
+        <div class="hero">
+          <div class="hero-atmosphere" aria-hidden="true">
+            <div class="hero-glow hero-glow--window"></div>
+            <div class="hero-glow hero-glow--lamp"></div>
+            <div class="hero-hallway"></div>
+            <div class="hero-grain"></div>
+          </div>
+
+          <div class="hero-content">
+            <p class="brand-lockup">
+              <span class="brand-org">The George Org</span>
+              <span class="brand-sep" aria-hidden="true">·</span>
+              <span class="brand-dtech">d-Tech</span>
+            </p>
+            <h1 class="hero-title">Care Trials</h1>
+            <p class="hero-lede">Short, low-risk home trials that turn recurring care problems into proven product variants.</p>
+            <div class="hero-cta-group">
+              <a class="btn btn--primary btn--pulse" href="#moments">Choose a care moment</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="moments-section" id="moments">
+          <div class="section-intro">
+            <h2 class="section-title">What keeps coming up?</h2>
+            <p class="section-lede">Pick the moment that matches your week. We’ll sketch a trial you can try at home.</p>
+          </div>
+
+          <div class="moment-choices" role="list">
+            <button type="button" class="moment-choice" role="listitem" data-nav="portrait" data-moment="phone">
+              <span class="moment-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="8" y="3" width="12" height="22" rx="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="14" cy="21.5" r="1.2" fill="currentColor"/></svg>
+              </span>
+              <span class="moment-copy">
+                <span class="moment-label">Phone distress</span>
+                <span class="moment-hint">Unknown callers shake the day</span>
+              </span>
+              <span class="moment-arrow" aria-hidden="true">→</span>
+            </button>
+            <button type="button" class="moment-choice" role="listitem" data-nav="portrait" data-moment="tv">
+              <span class="moment-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 23h8M14 19v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </span>
+              <span class="moment-copy">
+                <span class="moment-label">TV confusion</span>
+                <span class="moment-hint">Remote and menus overwhelm</span>
+              </span>
+              <span class="moment-arrow" aria-hidden="true">→</span>
+            </button>
+            <button type="button" class="moment-choice" role="listitem" data-nav="portrait" data-moment="voices">
+              <span class="moment-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 18a6 6 0 1 1 12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="14" cy="10" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M5 23c1.5-3 4.2-4.5 9-4.5s7.5 1.5 9 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </span>
+              <span class="moment-copy">
+                <span class="moment-label">Misses familiar voices</span>
+                <span class="moment-hint">Quiet house, fewer check-ins</span>
+              </span>
+              <span class="moment-arrow" aria-hidden="true">→</span>
+            </button>
+            <button type="button" class="moment-choice" role="listitem" data-nav="portrait" data-moment="falls">
+              <span class="moment-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 22h16M9 22l2-8h6l2 8M12 10l2-4 2 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="moment-copy">
+                <span class="moment-label">Falls worry</span>
+                <span class="moment-hint">Night hallways feel unsafe</span>
+              </span>
+              <span class="moment-arrow" aria-hidden="true">→</span>
+            </button>
+            <button type="button" class="moment-choice" role="listitem" data-nav="portrait" data-moment="evenings">
+              <span class="moment-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M18.5 14.5A6.5 6.5 0 0 1 12 21a6.5 6.5 0 1 1 5.2-10.4 5 5 0 0 0 1.3 3.9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="moment-copy">
+                <span class="moment-label">Evenings harder</span>
+                <span class="moment-hint">Sundowning, restlessness</span>
+              </span>
+              <span class="moment-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <aside class="teaser-strip" aria-label="Other trial ideas">
+            <p class="teaser-label">Also in the pipeline</p>
+            <ul class="teaser-list">
+              <li>Church radio companion</li>
+              <li>TV remote cover</li>
+              <li>Fall-alert mat</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 2. Problem Portrait -->
+      <section class="screen" id="screen-portrait" data-screen="problem-portrait" aria-label="Problem Portrait" hidden>
+        <div class="screen-pad">
+          <p class="eyebrow">Problem portrait</p>
+          <h1 class="screen-title">Unknown callers upset Mum.</h1>
+          <p class="screen-lede">When the phone rings from a number she doesn’t know, she freezes, answers in a panic, or spends the afternoon unsettled — even if the call was harmless.</p>
+
+          <div class="portrait-block">
+            <h2 class="block-title">What families describe</h2>
+            <ul class="evidence-list">
+              <li>“She picks up every unknown number, then can’t settle for hours.”</li>
+              <li>“Scam calls leave her convinced we’ve forgotten her.”</li>
+              <li>“I mute the phone and feel guilty — she still wants to feel reachable.”</li>
+            </ul>
+          </div>
+
+          <div class="affects-row">
+            <div class="affects-item">
+              <h3 class="affects-label">Who it hits</h3>
+              <p>Person living with dementia, primary caregiver, and anyone calling from work or new numbers.</p>
+            </div>
+            <div class="affects-item">
+              <h3 class="affects-label">Why it recurs</h3>
+              <p>Recognition and trust shrink; the ringtone still means “answer.” Silence feels like abandonment.</p>
+            </div>
+          </div>
+
+          <div class="screen-actions">
+            <button type="button" class="btn btn--primary" data-nav="trial">See a 7-day trial</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Trial Plan -->
+      <section class="screen" id="screen-trial" data-screen="trial-plan" aria-label="Trial Plan" hidden>
+        <div class="screen-pad">
+          <p class="eyebrow">Trial plan · 7 days</p>
+          <h1 class="screen-title">Trusted-caller trial</h1>
+          <p class="screen-lede">Allow only a short list of familiar numbers to ring through. Everything else goes to voicemail or a calm message.</p>
+
+          <ol class="recipe-steps">
+            <li>
+              <span class="recipe-step-num">1</span>
+              <div>
+                <h2 class="recipe-step-title">Setup</h2>
+                <p>Pick 4–6 trusted numbers (family, GP, neighbour). Add them to Contacts and turn on silence for unknown callers — or use a simple allow-list app.</p>
+              </div>
+            </li>
+            <li>
+              <span class="recipe-step-num">2</span>
+              <div>
+                <h2 class="recipe-step-title">Effort</h2>
+                <p>~20 minutes once, then a 2-minute evening note: Did she settle after any ring? Did you miss anything urgent?</p>
+              </div>
+            </li>
+            <li>
+              <span class="recipe-step-num">3</span>
+              <div>
+                <h2 class="recipe-step-title">Safety</h2>
+                <p>Keep one known emergency path (neighbour / pendant / landline). Tell the GP surgery your preferred callback number. Review the voicemail once a day together if she wants.</p>
+              </div>
+            </li>
+            <li>
+              <span class="recipe-step-num">4</span>
+              <div>
+                <h2 class="recipe-step-title">Success looks like</h2>
+                <p>Fewer panicked afternoon calls. She still hears from people she knows. You sleep easier without cutting her off from the world.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="screen-actions">
+            <button type="button" class="btn btn--primary" data-nav="checkin">Log a quick check-in</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Quick Check-in -->
+      <section class="screen" id="screen-checkin" data-screen="quick-checkin" aria-label="Quick Check-in" hidden>
+        <div class="screen-pad">
+          <p class="eyebrow">Day 4 · Quick check-in</p>
+          <h1 class="screen-title">How did the trial go today?</h1>
+          <p class="screen-lede">One tap is enough. Optional notes help the next family.</p>
+
+          <fieldset class="checkin-options" id="checkin-options">
+            <legend class="visually-hidden">Outcome</legend>
+            <button type="button" class="checkin-option" data-outcome="helped" aria-pressed="false">
+              <span class="checkin-dot checkin-dot--helped" aria-hidden="true"></span>
+              <span class="checkin-label">Helped</span>
+              <span class="checkin-desc">Calmer after rings, or fewer upsets</span>
+            </button>
+            <button type="button" class="checkin-option" data-outcome="same" aria-pressed="false">
+              <span class="checkin-dot checkin-dot--same" aria-hidden="true"></span>
+              <span class="checkin-label">No difference</span>
+              <span class="checkin-desc">About the same as before</span>
+            </button>
+            <button type="button" class="checkin-option" data-outcome="harder" aria-pressed="false">
+              <span class="checkin-dot checkin-dot--harder" aria-hidden="true"></span>
+              <span class="checkin-label">Made things harder</span>
+              <span class="checkin-desc">More worry, missed calls, or friction</span>
+            </button>
+          </fieldset>
+
+          <div class="checkin-note-wrap" id="checkin-note-wrap" hidden>
+            <label class="field-label" for="checkin-note">What changed? <span class="optional">(optional)</span></label>
+            <textarea id="checkin-note" class="field-textarea" rows="3" placeholder="e.g. She answered her sister fine, but asked why the church lady didn’t ring…"></textarea>
+          </div>
+
+          <div class="checkin-status" id="checkin-status" role="status" aria-live="polite" hidden></div>
+
+          <div class="screen-actions">
+            <button type="button" class="btn btn--primary" id="save-checkin" disabled>Save check-in</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. What Families Learned -->
+      <section class="screen" id="screen-learned" data-screen="what-families-learned" aria-label="What Families Learned" hidden>
+        <div class="screen-pad">
+          <p class="eyebrow">Collective learning</p>
+          <h1 class="screen-title">What families learned</h1>
+          <p class="screen-lede">From 18 trusted-caller trials. Patterns, not promises — each home is different.</p>
+
+          <ul class="pattern-list">
+            <li><strong>12 helped</strong> — fewer afternoon spirals when only known voices rang.</li>
+            <li><strong>4 no difference</strong> — usually when the allow-list was too short or voicemail was never checked.</li>
+            <li><strong>2 harder</strong> — missed a church volunteer and a mobile GP callback.</li>
+          </ul>
+
+          <h2 class="block-title variants-heading">Two variants emerging</h2>
+          <div class="variant-pair" role="list">
+            <article class="variant" role="listitem">
+              <p class="variant-tag">Variant A</p>
+              <h3 class="variant-name">Trusted Calls Only</h3>
+              <p>Strict allow-list. Best when scams or stranger rings are the main trigger.</p>
+            </article>
+            <article class="variant" role="listitem">
+              <p class="variant-tag variant-tag--branch">Variant B</p>
+              <h3 class="variant-name">Church &amp; Family Calls</h3>
+              <p>Allow-list plus one “community” bucket (church office, volunteers) so familiar-but-not-family numbers still get through.</p>
+            </article>
+          </div>
+
+          <div class="screen-actions">
+            <button type="button" class="btn btn--primary" data-nav="workbench">Open George’s Workbench</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. George's Workbench -->
+      <section class="screen" id="screen-workbench" data-screen="georges-workbench" aria-label="George’s Workbench" hidden>
+        <div class="screen-pad">
+          <p class="eyebrow">George’s Workbench</p>
+          <h1 class="screen-title">Evidence → decide</h1>
+          <p class="screen-lede">Turn trial outcomes into the next product move: refine, branch, or stop.</p>
+
+          <div class="evidence-panel" id="evidence-panel">
+            <h2 class="block-title">This trial’s signal</h2>
+            <p class="evidence-summary" id="evidence-summary">No check-in saved yet — using the collective pattern: mostly helped, with a branch for community callers.</p>
+            <dl class="evidence-meta">
+              <div>
+                <dt>Moment</dt>
+                <dd>Phone distress</dd>
+              </div>
+              <div>
+                <dt>Recipe</dt>
+                <dd>Trusted-caller · 7 days</dd>
+              </div>
+              <div>
+                <dt>Risk</dt>
+                <dd>Low · reversible</dd>
+              </div>
+            </dl>
+          </div>
+
+          <fieldset class="decide-options" id="decide-options">
+            <legend class="block-title">Your call</legend>
+            <button type="button" class="decide-option" data-decision="refine" aria-pressed="false">
+              <span class="decide-name">Refine</span>
+              <span class="decide-desc">Tighten setup copy and default allow-list size. Keep the same product spine.</span>
+            </button>
+            <button type="button" class="decide-option" data-decision="branch" aria-pressed="false">
+              <span class="decide-name">Branch</span>
+              <span class="decide-desc">Ship “Church &amp; Family Calls” as a second variant from the same trial.</span>
+            </button>
+            <button type="button" class="decide-option" data-decision="stop" aria-pressed="false">
+              <span class="decide-name">Stop</span>
+              <span class="decide-desc">Park this line. Evidence isn’t strong enough — or harm outweighs benefit.</span>
+            </button>
+          </fieldset>
+
+          <div class="decision-status" id="decision-status" role="status" aria-live="polite" hidden></div>
+
+          <div class="screen-actions screen-actions--split">
+            <button type="button" class="btn btn--ghost" data-nav="home">Back to care moments</button>
+            <button type="button" class="btn btn--primary" id="confirm-decision" disabled>Confirm decision</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
